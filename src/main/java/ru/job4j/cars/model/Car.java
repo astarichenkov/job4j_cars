@@ -13,13 +13,26 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String mark;
+    private int year;
+    private int mileage;
+    private boolean isBroken;
 
-    private String model;
 
     @ManyToOne
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
+
+    @ManyToOne
+    @JoinColumn(name = "bodytype_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
+    private BodyType bodyType;
+
+    @ManyToOne
+    @JoinColumn(name = "model_id", foreignKey = @ForeignKey(name = "MODEL_ID_FK"))
+    private Model model;
+
+    @ManyToOne
+    @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MAARK_ID_FK"))
+    private Mark mark;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "history_owner", joinColumns = {
@@ -31,7 +44,7 @@ public class Car {
     public Car() {
     }
 
-    public static Car of(String mark, String model) {
+    public static Car of(Mark mark, Model model) {
         Car car = new Car();
         car.mark = mark;
         car.model = model;
