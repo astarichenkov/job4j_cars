@@ -75,7 +75,13 @@ public class Car {
     public String toString() {
         return "Car{"
                 + "id=" + id
+                + ", year=" + year
+                + ", mileage=" + mileage
+                + ", isBroken=" + isBroken
                 + ", engine=" + engine
+                + ", bodyType=" + bodyType
+                + ", model=" + model
+                + ", mark=" + mark
                 + ", drivers=" + drivers
                 + '}';
     }
