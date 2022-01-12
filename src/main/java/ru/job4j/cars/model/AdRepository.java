@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
@@ -26,7 +27,7 @@ public class AdRepository implements AutoCloseable {
         return Lazy.INST;
     }
 
-    public List<Ad> findAll() {
+    public List<Ad> findByLastDay() {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                         + "join fetch ad.car c "
@@ -36,6 +37,21 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.model md "
                         + "join fetch c.drivers dr "
                         + "where DATE(ad.created) = (CURRENT_DATE - 1)ORDER BY ad.id").list()
+        );
+    }
+
+    public List<Ad> findByPeriod(Date start, Date end) {
+        return this.tx(
+                session -> session.createQuery("select distinct ad from Ad ad "
+                        + "join fetch ad.car c "
+                        + "join fetch c.engine e "
+                        + "join fetch c.bodyType "
+                        + "join fetch c.mark mr "
+                        + "join fetch c.model md "
+                        + "join fetch c.drivers dr "
+                        + "where DATE(ad.created) BETWEEN "
+                        + "DATE('" + start + "') AND "
+                        + "DATE('" + end + "') ORDER BY ad.created").list()
         );
     }
 
