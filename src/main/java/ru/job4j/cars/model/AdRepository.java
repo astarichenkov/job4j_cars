@@ -107,6 +107,18 @@ public class AdRepository implements AutoCloseable {
         );
     }
 
+    public List<Mark> getAllMarks() {
+        return this.tx(
+                session -> session.createQuery("from Mark ").list()
+        );
+    }
+
+    public List<BodyType> getAllBodytypes() {
+        return this.tx(
+                session -> session.createQuery("from BodyType ").list()
+        );
+    }
+
     public Mark findMarkByName(String name) {
         return (Mark) this.tx(
                 session -> session.createQuery("from Mark m "

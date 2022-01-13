@@ -2,10 +2,7 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.cars.model.AdRepository;
-import ru.job4j.cars.model.BasicInformation;
-import ru.job4j.cars.model.City;
-import ru.job4j.cars.model.Model;
+import ru.job4j.cars.model.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +30,9 @@ public class BasicServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<City> cities = AdRepository.instOf().getAllCities();
         List<Model> models = AdRepository.instOf().getAllModels();
-        BasicInformation basicInformation = new BasicInformation(cities, models);
+        List<Mark> marks = AdRepository.instOf().getAllMarks();
+        List<BodyType> bodytypes = AdRepository.instOf().getAllBodytypes();
+        BasicInformation basicInformation = new BasicInformation(models, marks, bodytypes, cities);
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(basicInformation);

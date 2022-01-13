@@ -11,6 +11,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -26,12 +28,11 @@
         $(document).ready(function () {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/cars/cities',
+                url: 'http://localhost:8080/cars/basic',
                 dataType: 'json'
             }).done(function (data) {
-                console.log(data.length + ' length');
-                console.log(data);
-                for (let city of data) {
+                let cities = data.cities
+                for (let city of cities) {
                     let option = document.createElement("option");
                     option.text = city.name;
                     option.value = city.name;
@@ -45,7 +46,7 @@
     </script>
 
 
-    <title>Работа мечты</title>
+    <title>Добавить объявление</title>
 </head>
 <body>
 
