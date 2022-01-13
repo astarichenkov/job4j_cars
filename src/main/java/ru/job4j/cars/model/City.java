@@ -3,10 +3,11 @@ package ru.job4j.cars.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "city")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+//    @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;

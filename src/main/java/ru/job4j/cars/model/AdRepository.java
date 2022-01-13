@@ -27,6 +27,18 @@ public class AdRepository implements AutoCloseable {
         return Lazy.INST;
     }
 
+    public List<Ad> findAll() {
+        return this.tx(
+                session -> session.createQuery("select distinct ad from Ad ad "
+                        + "join fetch ad.car c "
+                        + "join fetch c.engine e "
+                        + "join fetch c.bodyType "
+                        + "join fetch c.mark mr "
+                        + "join fetch c.model md "
+                        + "join fetch c.drivers dr").list()
+        );
+    }
+
     public List<Ad> findByLastDay() {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
@@ -80,6 +92,18 @@ public class AdRepository implements AutoCloseable {
                                 + "where c.mark = :fMark ORDER BY ad.id ")
                         .setParameter("fMark", mark)
                         .list()
+        );
+    }
+
+    public List<City> getAllCities() {
+        return this.tx(
+                session -> session.createQuery("from City").list()
+        );
+    }
+
+    public List<Model> getAllModels() {
+        return this.tx(
+                session -> session.createQuery("from Model").list()
         );
     }
 
