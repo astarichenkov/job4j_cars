@@ -44,10 +44,11 @@ public class Car {
     public Car() {
     }
 
-    public static Car of(Mark mark, Model model) {
+    public static Car of(Mark mark, Model model, BodyType bodyType) {
         Car car = new Car();
         car.mark = mark;
         car.model = model;
+        car.bodyType = bodyType;
         return car;
     }
 

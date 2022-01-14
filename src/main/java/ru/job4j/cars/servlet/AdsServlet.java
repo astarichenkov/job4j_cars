@@ -41,7 +41,7 @@ public class AdsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Ad> items = AdRepository.instOf().findAllWithPhotos();
+        List<Ad> items = AdRepository.instOf().findAll();
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(items);

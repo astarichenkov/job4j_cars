@@ -171,7 +171,7 @@
                 Создать объявление.
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/ads" method="post">
+                <form method="post">
                     <div class="form-group">
                         <label>Название объявления</label>
                         <input type="text" class="form-control" name="name" id="name">

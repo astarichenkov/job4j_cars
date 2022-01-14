@@ -1,6 +1,7 @@
 package ru.job4j.cars.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -13,17 +14,16 @@ public class BasicInformation {
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Model> models;
+    private Set<Model> models = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Mark> marks = new HashSet<>();
 
-    private Set<Mark> marks;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BodyType> bodies = new HashSet<>();
 
-    private Set<BodyType> bodies;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-
-    private Set<City> cities;
+    private Set<City> cities = new HashSet<>();
 
     public BasicInformation() {
     }
@@ -35,6 +35,22 @@ public class BasicInformation {
         bs.bodies = bodies;
         bs.cities = cities;
         return bs;
+    }
+
+    public void addModel(Model model) {
+        this.models.add(model);
+    }
+
+    public void addMark(Mark mark) {
+        this.marks.add(mark);
+    }
+
+    public void addBodytype(BodyType bodyType) {
+        this.bodies.add(bodyType);
+    }
+
+    public void addCity(City city) {
+        this.cities.add(city);
     }
 
     @Override
