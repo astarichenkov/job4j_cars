@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import ru.job4j.cars.model.Ad;
 import ru.job4j.cars.model.AdRepository;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
+@WebServlet("/ads")
 public class AdsServlet extends HttpServlet {
 
     private static final Gson GSON = new GsonBuilder().create();
