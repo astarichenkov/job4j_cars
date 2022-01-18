@@ -11,6 +11,10 @@ public class Model {
 
     private String name;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "marks_id")
+    private Mark mark;
+
     public Model() {
     }
 
@@ -34,6 +38,14 @@ public class Model {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Mark getMark() {
+        return mark;
+    }
+
+    public void setMark(Mark mark) {
+        this.mark = mark;
     }
 
     @Override

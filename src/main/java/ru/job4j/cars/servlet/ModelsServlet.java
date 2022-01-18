@@ -21,7 +21,8 @@ public class ModelsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Model> list = AdRepository.instOf().getModels();
+        int id = Integer.parseInt(req.getParameter("id"));
+        List<Model> list = AdRepository.instOf().getModels(id);
         resp.setContentType("application/json; charset=utf-8");
         OutputStream output = resp.getOutputStream();
         String json = GSON.toJson(list);

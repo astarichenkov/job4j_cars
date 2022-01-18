@@ -128,33 +128,26 @@ public class AdRepository implements AutoCloseable {
         );
     }
 
-//    public BasicInformation getBasicInformation() {
-//        return (BasicInformation) this.tx(
-//                session -> session.createQuery("select distinct bs from BasicInformation bs "
-//                        + "join fetch bs.models mo "
-//                        + "join fetch bs.marks ma "
-//                        + "join fetch bs.bodies bo "
-//                        + "join fetch bs.cities ci "
-//                ).uniqueResult()
-//        );
-//    }
-
-    public List<Model> getModels() {
-        return this.tx(
-                session -> session.createQuery("from Model").list()
-        );
-    }
 
     public List<Mark> getMarks() {
         return this.tx(
-                session -> session.createQuery("from Mark").list()
+                session -> session.createQuery("from Mark")
+                        .list()
+        );
+    }
+
+    public List<Model> getModels(int id) {
+        return this.tx(
+                session -> session.createQuery("from Model m where m.mark.id = :id")
+                        .setParameter("id", id)
+                        .list()
         );
     }
 
     public Mark findMarkByName(String name) {
-        return (Mark) this.tx(
+        return this.tx(
                 session -> session.createQuery("from Mark m "
-                                + "where m.name = :fName")
+                                + "where m.name = :fName", Mark.class)
                         .setParameter("fName", name)
                         .uniqueResult());
     }

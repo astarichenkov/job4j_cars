@@ -11,6 +11,14 @@ public class Mark {
 
     private String name;
 
+//    @OneToMany(mappedBy = "mark")
+//    @JoinColumn(name = "marks_id")
+//    private List<Model> models = new ArrayList<>();
+//
+//    public void addModel(Model model) {
+//        this.models.add(model);
+//    }
+
     public Mark() {
     }
 

@@ -30,7 +30,9 @@
 
     <script>
         $(document).ready(function () {
+            clearOptionsFast("marksList")
             fillMarks();
+            fillModels(1)
         });
 
         function clearOptionsFast(id) {
@@ -41,11 +43,12 @@
             return newSelectObj;
         }
 
-        function fillModels() {
+        function fillModels(value) {
+            console.log(value)
             clearOptionsFast("modelsList");
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/cars/models',
+                url: 'http://localhost:8080/cars/models?id=' + value,
                 dataType: 'json'
             }).done(function (data) {
                 for (let i = 0; i < data.length; i++) {
@@ -107,16 +110,19 @@
                         <input type="text" class="form-control" name="description" id="description">
                         <br>
                         <label>Марка автомобиля</label>
-                        <select class="form-control" id="marksList" name="mark" onchange="fillModels()"></select>
+                        <select class="form-control" id="marksList" name="mark" onchange="fillModels(this.value)">
+<%--                            <option></option>--%>
+                        </select>
 
                         <label>Модель автомобиля</label>
-                        <select class="form-control" id="modelsList" name="model"></select>
+                        <select class="form-control" id="modelsList" name="model">
+                            <option></option>
+                        </select>
 
                         <label>Тип кузова</label>
-                        <select class="form-control" id="bodiesList" name="bodytype" onchange="">
+                        <select class="form-control" id="bodiesList" name="bodytype" onchange="fillModels(this.value)">
                             <option>123</option>
                             <option>456</option>
-
                         </select>
 
                         <label>Мощность двигателя</label>
