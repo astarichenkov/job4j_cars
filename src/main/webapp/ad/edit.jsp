@@ -30,25 +30,25 @@
 
     <script>
         $(document).ready(function () {
-            clearOptionsFast("marksList")
+            clearOptions("marksList")
             fillMarks();
-            fillModels(1)
+            fillModels(1);
+            fillBodies();
+            fillCities()
         });
 
-        function clearOptionsFast(id) {
-            var selectObj = document.getElementById(id);
-            var selectParentNode = selectObj.parentNode;
-            var newSelectObj = selectObj.cloneNode(false); // Make a shallow copy
+        function clearOptions(id) {
+            let selectObj = document.getElementById(id);
+            let selectParentNode = selectObj.parentNode;
+            let newSelectObj = selectObj.cloneNode(false);
             selectParentNode.replaceChild(newSelectObj, selectObj);
             return newSelectObj;
         }
 
-        function fillModels(value) {
-            console.log(value)
-            clearOptionsFast("modelsList");
+        function fillOptions(url, id) {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/cars/models?id=' + value,
+                url: url,
                 dataType: 'json'
             }).done(function (data) {
                 for (let i = 0; i < data.length; i++) {
@@ -56,38 +56,40 @@
                     let option = document.createElement("option");
                     option.text = el.name;
                     option.value = el.id;
-                    let select = document.getElementById("modelsList");
+                    let select = document.getElementById(id);
                     select.appendChild(option);
                 }
             }).fail(function (err) {
                 console.log(err);
             });
+        }
+
+        function fillBodies() {
+            let url = 'http://localhost:8080/cars/bodies';
+            let id = "bodiesList"
+            fillOptions(url, id);
         }
 
         function fillMarks() {
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:8080/cars/marks',
-                dataType: 'json'
-            }).done(function (data) {
-                for (let i = 0; i < data.length; i++) {
-                    let el = data[i];
-                    let option = document.createElement("option");
-                    option.text = el.name;
-                    option.value = el.id;
-                    let select = document.getElementById("marksList");
-                    select.appendChild(option);
-                }
-            }).fail(function (err) {
-                console.log(err);
-            });
+            let url = 'http://localhost:8080/cars/marks';
+            let id = "marksList"
+            fillOptions(url, id);
+        }
+
+        function fillModels(value) {
+            clearOptions("modelsList");
+            let url = 'http://localhost:8080/cars/models?id=' + value;
+            let id = "modelsList"
+            fillOptions(url, id);
+        }
+
+        function fillCities() {
+            let url = 'http://localhost:8080/cars/cities';
+            let id = "citiesList"
+            fillOptions(url, id);
         }
 
 
-        function sout(value) {
-            alert(value);
-            clearOptionsFast("modelsList");
-        }
     </script>
 
     <title>Добавить объявление</title>
@@ -110,20 +112,14 @@
                         <input type="text" class="form-control" name="description" id="description">
                         <br>
                         <label>Марка автомобиля</label>
-                        <select class="form-control" id="marksList" name="mark" onchange="fillModels(this.value)">
-<%--                            <option></option>--%>
-                        </select>
+                        <select class="form-control" id="marksList" name="mark"
+                                onchange="fillModels(this.value)"></select>
 
                         <label>Модель автомобиля</label>
-                        <select class="form-control" id="modelsList" name="model">
-                            <option></option>
-                        </select>
+                        <select class="form-control" id="modelsList" name="model"></select>
 
                         <label>Тип кузова</label>
-                        <select class="form-control" id="bodiesList" name="bodytype" onchange="fillModels(this.value)">
-                            <option>123</option>
-                            <option>456</option>
-                        </select>
+                        <select class="form-control" id="bodiesList" name="bodytype" onchange=""></select>
 
                         <label>Мощность двигателя</label>
                         <input type="text" class="form-control" name="power" id="power">

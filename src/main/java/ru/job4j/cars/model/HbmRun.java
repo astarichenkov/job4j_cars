@@ -36,8 +36,10 @@ public class HbmRun {
             modelFour.setMark(markTwo);
 
 
-            BodyType bodyOne = new BodyType();
-            BodyType bodyTwo = new BodyType();
+            BodyType bodyOne = BodyType.of("Седан");
+            BodyType bodyTwo = BodyType.of("Хетчбек");
+            BodyType bodyThree = BodyType.of("Универсал");
+            BodyType bodyFour = BodyType.of("Внедорожник");
 
             Car carTwo = Car.of(markTwo, modelTwo, bodyTwo);
             carTwo.setEngine(engineTwo);
@@ -51,7 +53,7 @@ public class HbmRun {
 
             City city = new City("MSK");
             User user = User.of("Ivan", "+7951234455", "");
-            Ad ad = Ad.of(carTwo, "desc", city, user, 1000000);
+            Ad ad = Ad.of(carTwo, "Продается ауди", city, user, 1000000);
 
 
             session.save(ad);
@@ -76,6 +78,8 @@ public class HbmRun {
 
             session.save(bodyOne);
             session.save(bodyTwo);
+            session.save(bodyThree);
+            session.save(bodyFour);
 
             AdRepository adRepository = new AdRepository();
             adRepository.add(ad);

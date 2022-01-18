@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import ru.job4j.cars.model.Ad;
 import ru.job4j.cars.model.AdRepository;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -28,27 +30,16 @@ public class AdsServlet extends HttpServlet {
         }
         System.out.println("SBUILDER " + sb);
         Ad ad = GSON.fromJson(sb.toString(), Ad.class);
-        ad.setCreated(new Date());
-//        User user = (User) req.getSession().getAttribute("user");
-//        ad.setAuthor(user);
+        ad.setCreated(LocalDateTime.now());
         AdRepository.instOf().add(ad);
-
-//        resp.setContentType("application/json; charset=utf-8");
-//        OutputStream output = resp.getOutputStream();
-//        String json = GSON.toJson(ad);
-//        output.write(json.getBytes(StandardCharsets.UTF_8));
-//        output.flush();
-//        output.close();
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Ad> items = AdRepository.instOf().findAll();
-        resp.setContentType("application/json; charset=utf-8");
-        OutputStream output = resp.getOutputStream();
-        String json = GSON.toJson(items);
-        output.write(json.getBytes(StandardCharsets.UTF_8));
-        output.flush();
-        output.close();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        List<Ad> list = AdRepository.instOf().findAll();
+        String json = GSON.toJson(list);
+        req.setAttribute("json", json);
+        req.getRequestDispatcher("/writer")
+                .forward(req, resp);
     }
 }

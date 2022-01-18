@@ -14,7 +14,7 @@
 <!--    </servlet>-->
 <!--    <servlet>-->
 <!--        <servlet-name>GetCitiesServlet</servlet-name>-->
-<!--        <servlet-class>ru.job4j.cars.servlet.GetCitiesServlet</servlet-class>-->
+<!--        <servlet-class>ru.job4j.cars.servlet.CitiesServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet>-->
 <!--        <servlet-name>BasicServlet</servlet-name>-->

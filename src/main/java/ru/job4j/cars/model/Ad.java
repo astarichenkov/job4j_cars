@@ -1,6 +1,7 @@
 package ru.job4j.cars.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -12,8 +13,7 @@ public class Ad {
     private Long id;
 
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private LocalDateTime created;
 
     private int price;
     private String description;
@@ -39,7 +39,7 @@ public class Ad {
         ad.setCity(city);
         ad.setAuthor(author);
         ad.setPrice(price);
-        ad.setCreated(new Date(System.currentTimeMillis()));
+        ad.setCreated(LocalDateTime.now());
         return ad;
     }
 
@@ -51,11 +51,11 @@ public class Ad {
         this.id = id;
     }
 
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
