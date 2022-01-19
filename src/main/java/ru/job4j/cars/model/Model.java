@@ -1,8 +1,16 @@
 package ru.job4j.cars.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@Builder
 @Table(name = "models")
 public class Model {
     @Id
@@ -15,45 +23,10 @@ public class Model {
     @JoinColumn(name = "marks_id")
     private Mark mark;
 
-    public Model() {
-    }
-
     public static Model of(String name) {
         Model model = new Model();
         model.name = name;
         return model;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Mark getMark() {
-        return mark;
-    }
-
-    public void setMark(Mark mark) {
-        this.mark = mark;
-    }
-
-    @Override
-    public String toString() {
-        return "Model{"
-                + "id=" + id
-                + ", name='" + name
-                + '}';
     }
 }
 

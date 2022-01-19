@@ -15,9 +15,6 @@ public class HbmRun {
             Session session = sf.openSession();
             session.beginTransaction();
 
-            Engine engineOne = Engine.of(150);
-            Engine engineTwo = Engine.of(249);
-
             Driver driverOne = Driver.of("Oleg");
             Driver driverTwo = Driver.of("Eduard");
             Driver driverThree = Driver.of("Ilya");
@@ -41,24 +38,30 @@ public class HbmRun {
             BodyType bodyThree = BodyType.of("Универсал");
             BodyType bodyFour = BodyType.of("Внедорожник");
 
-            Car carTwo = Car.of(markTwo, modelTwo, bodyTwo);
-            carTwo.setEngine(engineTwo);
+            Car carTwo = Car.of(markTwo, modelTwo, bodyTwo, 2011, 98, 272000, false);
             carTwo.addDriver(driverOne);
             carTwo.addDriver(driverThree);
 
-            Car carOne = Car.of(markOne, modelOne, bodyOne);
-            carOne.setEngine(engineOne);
+            Car carOne = Car.of(markOne, modelOne, bodyOne, 2020, 150, 76000, true);
             carOne.addDriver(driverOne);
             carOne.addDriver(driverTwo);
 
-            City city = new City("MSK");
-            User user = User.of("Ivan", "+7951234455", "");
-            Ad ad = Ad.of(carTwo, "Продается ауди", city, user, 1000000);
+            City cityOne = new City("Нижний Новгород");
+            City cityTwo = new City("Москва");
+
+            User userOne = User.of("Anton", "+79506024452", "123");
+            User userTwo = User.of("Ivan", "+79990005555", "123");
+            session.save(userOne);
+            session.save(userTwo);
+            Ad adOne = Ad.of(carOne, "Продается ауди", cityOne, userTwo, 1000000);
+            Ad adTwo = Ad.of(carTwo, "Продается Лада Калина", cityTwo, userOne, 200000);
 
 
-            session.save(ad);
-            session.save(user);
-            session.save(city);
+            session.save(adOne);
+            session.save(adTwo);
+
+            session.save(cityOne);
+            session.save(cityTwo);
 
             session.save(markOne);
             session.save(markTwo);
@@ -73,20 +76,12 @@ public class HbmRun {
             session.save(driverOne);
             session.save(driverTwo);
 
-            session.save(engineOne);
-            session.save(engineTwo);
-
             session.save(bodyOne);
             session.save(bodyTwo);
             session.save(bodyThree);
             session.save(bodyFour);
 
-            AdRepository adRepository = new AdRepository();
-            adRepository.add(ad);
-
             session.getTransaction().commit();
-
-
             session.close();
         } catch (Exception e) {
             e.printStackTrace();

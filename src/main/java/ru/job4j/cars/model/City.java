@@ -7,12 +7,18 @@ import javax.persistence.*;
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
 
     public City() {
+    }
+
+    public static City of(String name) {
+        City city = new City();
+        city.name = name;
+        return city;
     }
 
     public City(String name) {

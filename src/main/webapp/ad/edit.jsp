@@ -4,7 +4,7 @@
 <%@ page import="ru.job4j.cars.model.City" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ru.job4j.cars.model.AdRepository" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -89,6 +89,31 @@
             fillOptions(url, id);
         }
 
+        function saveAd() {
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/cars/ads',
+                data: JSON.stringify({
+                    name: $('#name').val(),
+                    description: $('#description').val(),
+                    mark: $('#marksList').val(),
+                    model: $('#modelsList').val(),
+                    body: $('#bodiesList').val(),
+                    power: $('#power').val(),
+                    year: $('#year').val(),
+                    mileage: $('#mileage').val(),
+                    isBroken: $('#isBroken').is(':checked'),
+                    price: $('#price').val(),
+                    city: $('#citiesList').val(),
+                }),
+                dataType: 'json'
+            }).done(function () {
+
+            }).fail(function (err) {
+                console.log(err);
+            });
+        }
+
 
     </script>
 
@@ -124,13 +149,22 @@
                         <label>Мощность двигателя</label>
                         <input type="text" class="form-control" name="power" id="power">
 
+                        <label>Год выпуска</label>
+                        <input type="text" class="form-control" name="power" id="year">
+
+                        <label>Пробег</label>
+                        <input type="text" class="form-control" name="power" id="mileage">
+
+                        <label>Битая</label>
+                        <input type="checkbox" class="form-control" name="power" id="isBroken">
+
                         <label>Цена</label>
                         <input type="text" class="form-control" name="price" id="price">
 
                         <label>Город</label>
                         <select class="form-control" id="citiesList" name="city"></select>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="send()">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
                 </form>
             </div>
         </div>

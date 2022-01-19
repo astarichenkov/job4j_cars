@@ -1,10 +1,13 @@
 package ru.job4j.cars.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "cars")
 
 public class Car {
@@ -15,12 +18,13 @@ public class Car {
 
     private int year;
     private int mileage;
+    private int power;
     private boolean isBroken;
 
 
-    @ManyToOne
-    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
-    private Engine engine;
+//    @ManyToOne
+//    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
+//    private Engine engine;
 
     @ManyToOne
     @JoinColumn(name = "bodytype_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
@@ -44,11 +48,15 @@ public class Car {
     public Car() {
     }
 
-    public static Car of(Mark mark, Model model, BodyType bodyType) {
+    public static Car of(Mark mark, Model model, BodyType bodyType, int year, int power, int mileage, boolean isBroken) {
         Car car = new Car();
         car.mark = mark;
         car.model = model;
         car.bodyType = bodyType;
+        car.year = year;
+        car.power = power;
+        car.mileage = mileage;
+        car.isBroken = isBroken;
         return car;
     }
 
@@ -64,13 +72,6 @@ public class Car {
         this.id = id;
     }
 
-    public Engine getEngine() {
-        return engine;
-    }
-
-    public void setEngine(Engine engine) {
-        this.engine = engine;
-    }
 
     @Override
     public String toString() {
@@ -79,7 +80,7 @@ public class Car {
                 + ", year=" + year
                 + ", mileage=" + mileage
                 + ", isBroken=" + isBroken
-                + ", engine=" + engine
+                + ", power =" + power
                 + ", bodyType=" + bodyType
                 + ", model=" + model
                 + ", mark=" + mark

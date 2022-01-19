@@ -27,7 +27,7 @@ public class AdRepository implements AutoCloseable {
         return Lazy.INST;
     }
 
-    public void add(Ad ad) {
+    public void add1(Ad ad) {
         this.tx(
                 session -> session.createQuery("insert into Ad (description, created, isSold, photoId, price, author, car, city) "
                                 + "select ad.description, ad.created, ad.isSold, ad.photoId, ad.price, ad.author, ad.car, ad.city "
@@ -36,11 +36,85 @@ public class AdRepository implements AutoCloseable {
                         .executeUpdate());
     }
 
+    public void add(Ad ad) {
+        this.tx(
+                session -> session.save(ad));
+    }
+
+    public void add(Car car) {
+        this.tx(
+                session -> session.save(car));
+    }
+
+    public void add(City city) {
+        this.tx(
+                session -> session.save(city));
+    }
+
+    public void add(User user) {
+        this.tx(
+                session -> session.save(user));
+    }
+
+    public void add(Model model) {
+        this.tx(
+                session -> session.save(model));
+    }
+
+    public void add(Mark mark) {
+        this.tx(
+                session -> session.save(mark));
+    }
+
+    public void add(BodyType bodyType) {
+        this.tx(
+                session -> session.save(bodyType));
+    }
+
+    public User findUserByName(String name) {
+        return this.tx(
+                session -> session.createQuery("from User u "
+                                + "where u.name = :name", User.class)
+                        .setParameter("name", name)
+                        .uniqueResult());
+    }
+
+    public Mark findMarkById(int id) {
+        return this.tx(
+                session -> session.createQuery("from Mark m "
+                                + "where m.id = :id", Mark.class)
+                        .setParameter("id", id)
+                        .uniqueResult());
+    }
+    public Model findModelById(int id) {
+        return this.tx(
+                session -> session.createQuery("from Model m "
+                                + "where m.id = :id", Model.class)
+                        .setParameter("id", id)
+                        .uniqueResult());
+    }
+
+    public BodyType findBodyById(int id) {
+        return this.tx(
+                session -> session.createQuery("from BodyType b "
+                                + "where b.id = :id", BodyType.class)
+                        .setParameter("id", id)
+                        .uniqueResult());
+    }
+
+    public City findCityById(Long id) {
+        return this.tx(
+                session -> session.createQuery("from City c "
+                                + "where c.id = :id", City.class)
+                        .setParameter("id", id)
+                        .uniqueResult());
+    }
+
+
     public List<Ad> findAll() {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                         + "join fetch ad.car c "
-                        + "join fetch c.engine e "
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
@@ -52,7 +126,6 @@ public class AdRepository implements AutoCloseable {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                         + "join fetch ad.car c "
-                        + "join fetch c.engine e "
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
@@ -65,7 +138,6 @@ public class AdRepository implements AutoCloseable {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                         + "join fetch ad.car c "
-                        + "join fetch c.engine e "
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
@@ -80,7 +152,6 @@ public class AdRepository implements AutoCloseable {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                         + "join fetch ad.car c "
-                        + "join fetch c.engine e "
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
@@ -93,7 +164,6 @@ public class AdRepository implements AutoCloseable {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
                                 + "join fetch ad.car c "
-                                + "join fetch c.engine e "
                                 + "join fetch c.bodyType "
                                 + "join fetch c.mark mr "
                                 + "join fetch c.model md "
@@ -158,6 +228,8 @@ public class AdRepository implements AutoCloseable {
                         .setParameter("fName", name)
                         .uniqueResult());
     }
+
+
 
     private <T> T tx(final Function<Session, T> command) {
         Session session = sf.openSession();

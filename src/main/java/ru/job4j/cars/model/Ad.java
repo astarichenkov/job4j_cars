@@ -13,7 +13,8 @@ public class Ad {
     private Long id;
 
 
-    private LocalDateTime created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
 
     private int price;
     private String description;
@@ -39,7 +40,7 @@ public class Ad {
         ad.setCity(city);
         ad.setAuthor(author);
         ad.setPrice(price);
-        ad.setCreated(LocalDateTime.now());
+        ad.setCreated(new Date(System.currentTimeMillis()));
         return ad;
     }
 
@@ -51,11 +52,11 @@ public class Ad {
         this.id = id;
     }
 
-    public LocalDateTime getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

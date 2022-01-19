@@ -16,13 +16,11 @@
 
         <mapping class="ru.job4j.cars.model.Car" />
         <mapping class="ru.job4j.cars.model.Driver" />
-        <mapping class="ru.job4j.cars.model.Engine" />
         <mapping class="ru.job4j.cars.model.Ad" />
         <mapping class="ru.job4j.cars.model.City" />
         <mapping class="ru.job4j.cars.model.User" />
         <mapping class="ru.job4j.cars.model.Mark" />
         <mapping class="ru.job4j.cars.model.Model" />
         <mapping class="ru.job4j.cars.model.BodyType" />
-<!--        <mapping class="ru.job4j.cars.model.BasicInformation" />-->
     </session-factory>
 </hibernate-configuration>
