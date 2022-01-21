@@ -3,12 +3,10 @@ package ru.job4j.cars.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "cars")
+@Table(name = "car")
 
 public class Car {
 
@@ -21,11 +19,6 @@ public class Car {
     private int power;
     private boolean isBroken;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
-//    private Engine engine;
-
     @ManyToOne
     @JoinColumn(name = "bodytype_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
     private BodyType bodyType;
@@ -37,13 +30,6 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MAARK_ID_FK"))
     private Mark mark;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "history_owner", joinColumns = {
-            @JoinColumn(name = "car_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "driver_id", nullable = false, updatable = false)})
-    private Set<Driver> drivers = new HashSet<>();
 
     public Car() {
     }
@@ -58,10 +44,6 @@ public class Car {
         car.mileage = mileage;
         car.isBroken = isBroken;
         return car;
-    }
-
-    public void addDriver(Driver driver) {
-        this.drivers.add(driver);
     }
 
     public int getId() {
@@ -84,7 +66,6 @@ public class Car {
                 + ", bodyType=" + bodyType
                 + ", model=" + model
                 + ", mark=" + mark
-                + ", drivers=" + drivers
                 + '}';
     }
 }

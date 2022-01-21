@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Builder
-@Table(name = "models")
+//@Table(name = "models")
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

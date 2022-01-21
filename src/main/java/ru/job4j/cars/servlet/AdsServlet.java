@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet("/ads")
@@ -23,7 +19,7 @@ public class AdsServlet extends HttpServlet {
     private static final Gson GSON = new GsonBuilder().create();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         StringBuilder sb = new StringBuilder();
         while (req.getReader().ready()) {
             sb.append(req.getReader().readLine());
@@ -31,7 +27,6 @@ public class AdsServlet extends HttpServlet {
         System.out.println("SBUILDER " + sb.toString());
 
         JsonObject jobj = new Gson().fromJson(String.valueOf(sb), JsonObject.class);
-//        String name = jobj.get("name").getAsString();
         String description = jobj.get("description").getAsString();
 
         int power = jobj.get("power").getAsInt();
@@ -47,12 +42,14 @@ public class AdsServlet extends HttpServlet {
 
         Car car = Car.of(mark, model, body, year, power, mileage,  isBroken);
         AdRepository.instOf().add(car);
+        System.out.println(car.getId());
 
         User user = AdRepository.instOf().findUserByName("Anton");
 
         Ad ad = Ad.of(car, description, city, user, price);
         AdRepository.instOf().add(ad);
-        System.out.println(ad);
+
+        resp.sendRedirect(req.getContextPath() + "/edit.jsp?&id=" + city.getId());
     }
 
     @Override

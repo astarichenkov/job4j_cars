@@ -3,7 +3,7 @@ package ru.job4j.cars.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "bodytypes")
+//@Table(name = "bodytypes")
 public class BodyType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

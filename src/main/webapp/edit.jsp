@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -107,19 +107,48 @@
                     city: $('#citiesList').val(),
                 }),
                 dataType: 'json'
-            }).done(function () {
-
+            }).done(function (data) {
+                console.log(data);
+                window.location.replace("http://localhost:8080/cars/edit.jsp");
             }).fail(function (err) {
                 console.log(err);
             });
         }
-
 
     </script>
 
     <title>Добавить объявление</title>
 </head>
 <body>
+
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Добавить объявление</a>
+            </li>
+            <%--            <li class="nav-item">--%>
+            <%--                <a class="nav-link"href = "#">Выйти</a>--%>
+            <%--            </li>--%>
+            <%--            <li class="nav-item">--%>
+            <%--                <a href = "#">Выйти</a>--%>
+            <%--            </li>--%>
+            <%--            <li class="nav-item">--%>
+            <%--                <a href = "#">Выйти</a>--%>
+            <%--            </li>--%>
+            <c:if test="${user != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Выйти</a>
+                        <%--                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/> |--%>
+                        <%--                        Выйти</a>--%>
+                </li>
+            </c:if>
+        </ul>
+    </div>
+</div>
 
 <div class="container pt-3">
     <div class="row">
@@ -128,10 +157,8 @@
                 Создать объявление.
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Название объявления</label>
-                        <input type="text" class="form-control" name="name" id="name">
 
                         <label>Описание</label>
                         <input type="text" class="form-control" name="description" id="description">
@@ -163,6 +190,10 @@
 
                         <label>Город</label>
                         <select class="form-control" id="citiesList" name="city"></select>
+
+                        <div class="checkbox" style="margin-bottom: 10px">
+                            <input type="file" name="file">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
                 </form>

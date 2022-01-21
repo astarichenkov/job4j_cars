@@ -86,6 +86,7 @@ public class AdRepository implements AutoCloseable {
                         .setParameter("id", id)
                         .uniqueResult());
     }
+
     public Model findModelById(int id) {
         return this.tx(
                 session -> session.createQuery("from Model m "
@@ -118,7 +119,7 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
-                        + "join fetch c.drivers dr").list()
+                        + "ORDER BY ad.id " ).list()
         );
     }
 
@@ -129,7 +130,6 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
-                        + "join fetch c.drivers dr "
                         + "where DATE(ad.created) = (CURRENT_DATE - 1)ORDER BY ad.id").list()
         );
     }
@@ -141,7 +141,6 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
-                        + "join fetch c.drivers dr "
                         + "where DATE(ad.created) BETWEEN "
                         + "DATE('" + start + "') AND "
                         + "DATE('" + end + "') ORDER BY ad.created").list()
@@ -155,7 +154,6 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
-                        + "join fetch c.drivers dr "
                         + "where ad.photoId != 0 ORDER BY ad.id").list()
         );
     }
@@ -167,7 +165,6 @@ public class AdRepository implements AutoCloseable {
                                 + "join fetch c.bodyType "
                                 + "join fetch c.mark mr "
                                 + "join fetch c.model md "
-                                + "join fetch c.drivers dr "
                                 + "where c.mark = :fMark ORDER BY ad.id ")
                         .setParameter("fMark", mark)
                         .list()
@@ -228,7 +225,6 @@ public class AdRepository implements AutoCloseable {
                         .setParameter("fName", name)
                         .uniqueResult());
     }
-
 
 
     private <T> T tx(final Function<Session, T> command) {

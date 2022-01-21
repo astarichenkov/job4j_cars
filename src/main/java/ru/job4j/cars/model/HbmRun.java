@@ -15,9 +15,6 @@ public class HbmRun {
             Session session = sf.openSession();
             session.beginTransaction();
 
-            Driver driverOne = Driver.of("Oleg");
-            Driver driverTwo = Driver.of("Eduard");
-            Driver driverThree = Driver.of("Ilya");
 
             Mark markOne = Mark.of("Audi");
             Mark markTwo = Mark.of("Lada");
@@ -39,12 +36,8 @@ public class HbmRun {
             BodyType bodyFour = BodyType.of("Внедорожник");
 
             Car carTwo = Car.of(markTwo, modelTwo, bodyTwo, 2011, 98, 272000, false);
-            carTwo.addDriver(driverOne);
-            carTwo.addDriver(driverThree);
 
             Car carOne = Car.of(markOne, modelOne, bodyOne, 2020, 150, 76000, true);
-            carOne.addDriver(driverOne);
-            carOne.addDriver(driverTwo);
 
             City cityOne = new City("Нижний Новгород");
             City cityTwo = new City("Москва");
@@ -72,9 +65,6 @@ public class HbmRun {
 
             session.save(carOne);
             session.save(carTwo);
-
-            session.save(driverOne);
-            session.save(driverTwo);
 
             session.save(bodyOne);
             session.save(bodyTwo);
