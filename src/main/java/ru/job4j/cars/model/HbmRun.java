@@ -71,7 +71,9 @@ public class HbmRun {
             session.save(bodyThree);
             session.save(bodyFour);
 
+
             session.getTransaction().commit();
+
             session.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -79,6 +79,15 @@ public class AdRepository implements AutoCloseable {
                         .uniqueResult());
     }
 
+    public User findUserByPhoneAndPassword(String phone, String password) {
+        return this.tx(
+                session -> session.createQuery("from User u "
+                                + "where u.password = :password AND u.phone = :phone", User.class)
+                        .setParameter("phone", phone)
+                        .setParameter("password", password)
+                        .uniqueResult());
+    }
+
     public Mark findMarkById(int id) {
         return this.tx(
                 session -> session.createQuery("from Mark m "
@@ -119,7 +128,7 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.bodyType "
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
-                        + "ORDER BY ad.id " ).list()
+                        + "ORDER BY ad.id ").list()
         );
     }
 

@@ -1,8 +1,13 @@
 package ru.job4j.cars.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "users")
 public class User {
     @Id
@@ -23,14 +28,6 @@ public class User {
         user.phone = phone;
         user.password = password;
         return user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

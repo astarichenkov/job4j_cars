@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%--<%@ page contentType="text/html; charset=UTF-8" %>--%>
+<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -20,47 +21,39 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 
-    <title>Car sales</title>
+    <title>Работа мечты</title>
 </head>
-
 <body>
-
 <div class="container pt-3">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="./index.jsp">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./edit.jsp">Добавить объявление</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./login.jsp">Войти</a>
-            </li>
-            <li class="nav-item">
-        </ul>
-    </div>
-</div>
 
-<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Загрузить фото
+                Авторизация
             </div>
-            <c:set var="id" value="${id}"/>
             <div class="card-body">
-                <form action="<c:url value='/photo-upload.do?id=${id}'/>" method="post"
-                      enctype="multipart/form-data">
-                    <div class="checkbox" style="margin-bottom: 10px">
-                        <input type="file" name="file">
+                <form action="<%=request.getContextPath()%>/login.do" method="post">
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="text" class="form-control" name="phone" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <c:if test="${not empty error}">
+                        <div style="color:red; margin: 30px 0;">
+                                ${error}
+                        </div>
+                    </c:if>
                 </form>
+                <%--                <li class="nav-item">--%>
+                <%--                    <a class="card-link" href="<%=request.getContextPath()%>/reg.jsp">Регистрация</a>--%>
+                <%--                </li>--%>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

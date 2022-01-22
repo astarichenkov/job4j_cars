@@ -1,4 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" pageEncoding="UTF-8" session="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ page contentType="text/html; charset=UTF-8" %>--%>
 <%@ page import="ru.job4j.cars.model.Ad" %>
 <%@ page import="ru.job4j.cars.model.Car" %>
 <%@ page import="ru.job4j.cars.model.City" %>
@@ -121,29 +123,20 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container pt-3">
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">Главная</a>
+                <a class="nav-link" href="index.jsp">Главная</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Добавить объявление</a>
+                <a class="nav-link" href="edit.jsp">Добавить объявление</a>
             </li>
-            <%--            <li class="nav-item">--%>
-            <%--                <a class="nav-link"href = "#">Выйти</a>--%>
-            <%--            </li>--%>
-            <%--            <li class="nav-item">--%>
-            <%--                <a href = "#">Выйти</a>--%>
-            <%--            </li>--%>
-            <%--            <li class="nav-item">--%>
-            <%--                <a href = "#">Выйти</a>--%>
-            <%--            </li>--%>
             <c:if test="${user != null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти</a>
-                        <%--                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do"><c:out value="${user.name}"/> |--%>
-                        <%--                        Выйти</a>--%>
+                    <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">
+                        <c:out value="${user.name}"/> | Выйти
+                    </a>
                 </li>
             </c:if>
         </ul>
@@ -157,7 +150,7 @@
                 Создать объявление.
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">
                     <div class="form-group">
 
                         <label>Описание</label>
@@ -177,13 +170,13 @@
                         <input type="text" class="form-control" name="power" id="power">
 
                         <label>Год выпуска</label>
-                        <input type="text" class="form-control" name="power" id="year">
+                        <input type="text" class="form-control" name="year" id="year">
 
                         <label>Пробег</label>
-                        <input type="text" class="form-control" name="power" id="mileage">
+                        <input type="text" class="form-control" name="mileage" id="mileage">
 
                         <label>Битая</label>
-                        <input type="checkbox" class="form-control" name="power" id="isBroken">
+                        <input type="checkbox" class="form-control" name="isBroken" id="isBroken">
 
                         <label>Цена</label>
                         <input type="text" class="form-control" name="price" id="price">
@@ -195,7 +188,7 @@
                             <input type="file" name="file">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="">Сохранить</button>
                 </form>
             </div>
         </div>
