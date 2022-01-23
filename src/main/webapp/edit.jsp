@@ -110,12 +110,8 @@
                 }),
                 dataType: 'text',
                 success: function (data) {
-                    alert(data);
                     window.location.href = "http://localhost:8080/cars/upload.jsp?id=" + data;
                 }
-            // }).done(function (data) {
-            //     console.log(data);
-            //     window.location.replace("http://localhost:8080/cars/edit.jsp");
             }).fail(function (err) {
                 console.log(err);
             });

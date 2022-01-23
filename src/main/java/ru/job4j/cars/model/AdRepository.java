@@ -132,6 +132,21 @@ public class AdRepository implements AutoCloseable {
         );
     }
 
+    public List<Ad> findAdsByUserId(Long id) {
+        return this.tx(
+                session -> session.createQuery("select distinct ad from Ad ad "
+                                + "join fetch ad.car c "
+                                + "join fetch c.bodyType "
+                                + "join fetch c.mark mr "
+                                + "join fetch c.model md "
+                                + "join fetch ad.author a "
+                                + "WHERE a.id = :user "
+                                + "ORDER BY ad.id ")
+                        .setParameter("user", id)
+                        .list()
+        );
+    }
+
     public List<Ad> findByLastDay() {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "

@@ -20,11 +20,11 @@ import java.util.List;
 
 @WebServlet("/photo-upload.do")
 public class UploadServlet extends HttpServlet {
+    private final int FOLDER_NAME_FIELD_ID = 0;
 //    private static final Logger LOG = LoggerFactory.getLogger(DbStore.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("DOGET " + req.getParameter("id"));
         List<String> images = new ArrayList<>();
         for (File name : new File("c:\\images\\").listFiles()) {
             images.add(name.getName());
@@ -36,7 +36,6 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("DOPOST " + req.getParameter("fileId"));
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -44,13 +43,13 @@ public class UploadServlet extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List<FileItem> items = upload.parseRequest(req);
-            String subFolder = items.get(3).getFieldName();
+            String subFolder = items.get(FOLDER_NAME_FIELD_ID).getFieldName();
             File folder = new File("c:\\images\\" + subFolder);
             if (!folder.exists()) {
                 folder.mkdir();
             }
             for (FileItem item : items) {
-                if (!item.isFormField() && !item.getName().isEmpty()) {
+                if (!item.isFormField() && item.getFieldName().equals("file")) {
                     File file = new File(folder + File.separator + item.getName());
                     try (FileOutputStream out = new FileOutputStream(file)) {
                         out.write(item.getInputStream().readAllBytes());

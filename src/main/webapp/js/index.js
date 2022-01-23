@@ -1,7 +1,7 @@
 function refreshTable() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/cars/ads',
+        url: 'http://localhost:8080/cars/user-ads',
         dataType: 'json'
     }).done(function (data) {
         let checkbox = document.getElementById('showAllCheckbox');

@@ -22,16 +22,12 @@
             crossorigin="anonymous"></script>
     <script>
 
-        function getId() {
+        $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-            alert(id);
-            // let form = document.getElementById("upload");
-            // form.action = "/photo-upload.do?id=" + id;
             let formInput = document.getElementById("fileId");
-            formInput.value = id;
             formInput.name = id;
-        }
+        });
     </script>
 
     <title>Car sales</title>
@@ -67,19 +63,13 @@
                 <form action="${pageContext.request.contextPath}/photo-upload.do" method="post"
                 <%--                <form action="" method="post"--%>
                       enctype="multipart/form-data" id="upload">
-                    <div class="checkbox" style="margin-bottom: 10px">
-                        <input type="file" name="file">
-                    </div>
-                    <div class="checkbox" style="margin-bottom: 10px">
-                        <input type="file" name="file">
-                    </div>
-                    <div class="checkbox" style="margin-bottom: 10px">
-                        <input type="file" name="file">
-                    </div>
                     <input type="text" name="id" id="fileId">
+
+                    <div class="checkbox" style="margin-bottom: 10px">
+                        <input type="file" name="file" multiple>
+                    </div>
                     <button type="submit" class="btn btn-primary">Загрузить</button>
                 </form>
-                <button type="button" class="btn btn-primary" onclick="getId()">getId</button>
             </div>
         </div>
     </div>
