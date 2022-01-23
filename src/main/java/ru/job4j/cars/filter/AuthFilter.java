@@ -20,11 +20,11 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) sreq;
         HttpServletResponse resp = (HttpServletResponse) sresp;
         String uri = req.getRequestURI();
-        if (uri.endsWith("login.jsp")) {
+        if (uri.endsWith("login.do") || uri.endsWith("login.jsp")) {
             chain.doFilter(sreq, sresp);
             return;
         }
-        if (uri.endsWith("reg.jsp")) {
+        if (uri.endsWith("reg.do") || uri.endsWith("reg.jsp")) {
             chain.doFilter(sreq, sresp);
             return;
         }

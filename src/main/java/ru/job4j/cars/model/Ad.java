@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-//@Table(name = "ads")
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +16,11 @@ public class Ad {
 
     private int price;
     private String description;
+
+    @Column(name = "photo_id")
     private int  photoId;
+
+    @Column(name = "is_sold")
     private boolean isSold;
 
     @ManyToOne

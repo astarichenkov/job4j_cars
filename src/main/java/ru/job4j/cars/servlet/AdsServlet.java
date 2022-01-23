@@ -48,8 +48,6 @@ public class AdsServlet extends HttpServlet {
 
         Ad ad = Ad.of(car, description, city, user, price);
         AdRepository.instOf().add(ad);
-
-        resp.sendRedirect(req.getContextPath() + "/edit.jsp?&id=" + city.getId());
     }
 
     @Override

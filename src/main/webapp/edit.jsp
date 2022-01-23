@@ -150,7 +150,9 @@
                 Создать объявление.
             </div>
             <div class="card-body">
-                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="application/x-www-form-urlencoded">
+<%--                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post" enctype="application/x-www-form-urlencoded">--%>
+<%--                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">--%>
                     <div class="form-group">
 
                         <label>Описание</label>
@@ -164,7 +166,7 @@
                         <select class="form-control" id="modelsList" name="model"></select>
 
                         <label>Тип кузова</label>
-                        <select class="form-control" id="bodiesList" name="bodytype" onchange=""></select>
+                        <select class="form-control" id="bodiesList" name="body" onchange=""></select>
 
                         <label>Мощность двигателя</label>
                         <input type="text" class="form-control" name="power" id="power">
@@ -183,12 +185,8 @@
 
                         <label>Город</label>
                         <select class="form-control" id="citiesList" name="city"></select>
-
-                        <div class="checkbox" style="margin-bottom: 10px">
-                            <input type="file" name="file">
-                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
                 </form>
             </div>
         </div>

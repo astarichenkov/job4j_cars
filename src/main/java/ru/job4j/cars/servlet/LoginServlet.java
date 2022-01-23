@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
                     .phone(user.getPhone())
                     .build();
             req.getSession().setAttribute("user", userDto);
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
             req.setAttribute("error", "Неверный номер телефона или пароль");
             req.getRequestDispatcher("login.jsp")
