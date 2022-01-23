@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet("/ads")
@@ -42,12 +44,20 @@ public class AdsServlet extends HttpServlet {
 
         Car car = Car.of(mark, model, body, year, power, mileage,  isBroken);
         AdRepository.instOf().add(car);
-        System.out.println(car.getId());
 
-        User user = AdRepository.instOf().findUserByName("Anton");
+        UserDto userDto = (UserDto) req.getSession().getAttribute("user");
+        User user = AdRepository.instOf().findUserByName(userDto.getName());
 
         Ad ad = Ad.of(car, description, city, user, price);
         AdRepository.instOf().add(ad);
+
+
+        String json = GSON.toJson(ad.getId());
+        resp.setContentType("application/json; charset=utf-8");
+        OutputStream output = resp.getOutputStream();
+        output.write(json.getBytes(StandardCharsets.UTF_8));
+        output.flush();
+        output.close();
     }
 
     @Override

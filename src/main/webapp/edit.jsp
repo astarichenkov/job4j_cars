@@ -108,10 +108,14 @@
                     price: $('#price').val(),
                     city: $('#citiesList').val(),
                 }),
-                dataType: 'json'
-            }).done(function (data) {
-                console.log(data);
-                window.location.replace("http://localhost:8080/cars/edit.jsp");
+                dataType: 'text',
+                success: function (data) {
+                    alert(data);
+                    window.location.href = "http://localhost:8080/cars/upload.jsp?id=" + data;
+                }
+            // }).done(function (data) {
+            //     console.log(data);
+            //     window.location.replace("http://localhost:8080/cars/edit.jsp");
             }).fail(function (err) {
                 console.log(err);
             });
@@ -151,42 +155,42 @@
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
-<%--                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post" enctype="application/x-www-form-urlencoded">--%>
-<%--                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">--%>
+                    <%--                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post" enctype="application/x-www-form-urlencoded">--%>
+                    <%--                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">--%>
                     <div class="form-group">
 
                         <label>Описание</label>
-                        <input type="text" class="form-control" name="description" id="description">
+                        <input type="text" class="form-control" name="description" id="description" value="TEST">
                         <br>
                         <label>Марка автомобиля</label>
-                        <select class="form-control" id="marksList" name="mark"
+                        <select class="form-control" id="marksList" name="mark" value="1"
                                 onchange="fillModels(this.value)"></select>
 
                         <label>Модель автомобиля</label>
-                        <select class="form-control" id="modelsList" name="model"></select>
+                        <select class="form-control" id="modelsList" name="model" value="1"></select>
 
                         <label>Тип кузова</label>
-                        <select class="form-control" id="bodiesList" name="body" onchange=""></select>
+                        <select class="form-control" id="bodiesList" name="body" onchange="" value="1"></select>
 
                         <label>Мощность двигателя</label>
-                        <input type="text" class="form-control" name="power" id="power">
+                        <input type="text" class="form-control" name="power" id="power" value="177">
 
                         <label>Год выпуска</label>
-                        <input type="text" class="form-control" name="year" id="year">
+                        <input type="text" class="form-control" name="year" id="year" value="2000">
 
                         <label>Пробег</label>
-                        <input type="text" class="form-control" name="mileage" id="mileage">
+                        <input type="text" class="form-control" name="mileage" id="mileage" value="273000">
 
                         <label>Битая</label>
                         <input type="checkbox" class="form-control" name="isBroken" id="isBroken">
 
                         <label>Цена</label>
-                        <input type="text" class="form-control" name="price" id="price">
+                        <input type="text" class="form-control" name="price" id="price" value="120000">
 
                         <label>Город</label>
-                        <select class="form-control" id="citiesList" name="city"></select>
+                        <select class="form-control" id="citiesList" name="city" value="1"></select>
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
+                    <button type="button" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
                 </form>
             </div>
         </div>
