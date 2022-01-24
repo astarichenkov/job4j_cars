@@ -59,6 +59,7 @@ public class UploadServlet extends HttpServlet {
         } catch (FileUploadException e) {
 //            LOG.error("Message", e);
         }
-        doGet(req, resp);
+//        doGet(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/user-ads.jsp");
     }
 }

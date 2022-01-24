@@ -139,10 +139,9 @@ public class AdRepository implements AutoCloseable {
                                 + "join fetch c.bodyType "
                                 + "join fetch c.mark mr "
                                 + "join fetch c.model md "
-                                + "join fetch ad.author a "
-                                + "WHERE a.id = :user "
+                                + "WHERE ad.author.id = :userId "
                                 + "ORDER BY ad.id ")
-                        .setParameter("user", id)
+                        .setParameter("userId", id)
                         .list()
         );
     }

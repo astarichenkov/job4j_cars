@@ -42,6 +42,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="edit.jsp">Добавить объявление</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="user-ads.jsp">Мои объявления</a>
+            </li>
             <c:if test="${user != null}">
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/logout.do">
