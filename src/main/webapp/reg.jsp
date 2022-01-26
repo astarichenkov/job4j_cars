@@ -48,9 +48,7 @@
             </div>
           </c:if>
         </form>
-        <li class="card-link">
           <a class="card-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
-        </li>
       </div>
     </div>
   </div>

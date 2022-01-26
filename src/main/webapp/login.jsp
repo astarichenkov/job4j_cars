@@ -49,7 +49,9 @@
                         </div>
                     </c:if>
                 </form>
-                <%--                <li class="nav-item">--%>
+                <a class="card-link" href="<%=request.getContextPath()%>/reg.jsp">Регистрация</a>
+
+            <%--                <li class="nav-item">--%>
                 <%--                    <a class="card-link" href="<%=request.getContextPath()%>/reg.jsp">Регистрация</a>--%>
                 <%--                </li>--%>
             </div>
