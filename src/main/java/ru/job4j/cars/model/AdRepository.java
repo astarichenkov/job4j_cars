@@ -36,6 +36,13 @@ public class AdRepository implements AutoCloseable {
                         .executeUpdate());
     }
 
+    public void chandeStatus(long id) {
+        this.tx(
+                session -> session.createQuery("UPDATE Ad ad set ad.isSold = true WHERE ad.id = :id")
+                        .setParameter("id", id)
+                        .executeUpdate());
+    }
+
     public void add(Ad ad) {
         this.tx(
                 session -> session.save(ad));
@@ -129,6 +136,20 @@ public class AdRepository implements AutoCloseable {
                         + "join fetch c.mark mr "
                         + "join fetch c.model md "
                         + "ORDER BY ad.id ").list()
+        );
+    }
+
+    public List<Ad> findAdById(Long id) {
+        return this.tx(
+                session -> session.createQuery("select distinct ad from Ad ad "
+                                + "join fetch ad.car c "
+                                + "join fetch c.bodyType "
+                                + "join fetch c.mark mr "
+                                + "join fetch c.model md "
+                                + "WHERE ad.id = :id "
+                                + "ORDER BY ad.id ")
+                        .setParameter("id", id)
+                        .list()
         );
     }
 

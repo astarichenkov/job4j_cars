@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/ads")
@@ -62,7 +63,12 @@ public class AdsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        List<Ad> list = AdRepository.instOf().findAll();
+        List<Ad> list;
+        if (req.getParameter("id") != null) {
+            list = AdRepository.instOf().findAdById(1L);
+        } else {
+            list = AdRepository.instOf().findAll();
+        }
         String json = GSON.toJson(list);
         req.setAttribute("json", json);
         req.getRequestDispatcher("/writer")

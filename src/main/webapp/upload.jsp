@@ -60,10 +60,10 @@
             </div>
             <%--            <c:set var="id" value="${param.get(id)}"/>--%>
             <div class="card-body">
-                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post"
+                <form action="${pageContext.request.contextPath}/photo-upload.do?id=${pageContext.request.getParameter("id")}" method="post"
                 <%--                <form action="" method="post"--%>
                       enctype="multipart/form-data" id="upload">
-                    <input type="text" name="id" id="fileId">
+<%--                    <input type="text" name="id" id="fileId">--%>
 
                     <div class="checkbox" style="margin-bottom: 10px">
                         <input type="file" name="file" multiple>

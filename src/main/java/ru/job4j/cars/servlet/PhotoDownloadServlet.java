@@ -16,9 +16,11 @@ import java.io.IOException;
 public class PhotoDownloadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String id = req.getParameter("id");
-        String id = "66";
+        String id = req.getParameter("id");
         File downloadFile = FileUtils.getFilesFromFolder(id);
+        if (downloadFile == null) {
+            downloadFile = FileUtils.getFilesFromFolder("notfound");
+        }
         resp.setContentType("application/octet-stream");
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + downloadFile.getName() + "\"");
         try (FileInputStream stream = new FileInputStream(downloadFile)) {
