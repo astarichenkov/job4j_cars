@@ -27,14 +27,14 @@ public class AdRepository implements AutoCloseable {
         return Lazy.INST;
     }
 
-    public void add1(Ad ad) {
-        this.tx(
-                session -> session.createQuery("insert into Ad (description, created, isSold, photoId, price, author, car, city) "
-                                + "select ad.description, ad.created, ad.isSold, ad.photoId, ad.price, ad.author, ad.car, ad.city "
-                                + "from Ad ad where ad.id = :fId")
-                        .setParameter("fId", ad.getId())
-                        .executeUpdate());
-    }
+//    public void add1(Ad ad) {
+//        this.tx(
+//                session -> session.createQuery("insert into Ad (description, created, isSold, photoId, price, author, car, city) "
+//                                + "select ad.description, ad.created, ad.isSold, ad.photoId, ad.price, ad.author, ad.car, ad.city "
+//                                + "from Ad ad where ad.id = :fId")
+//                        .setParameter("fId", ad.getId())
+//                        .executeUpdate());
+//    }
 
     public void chandeStatus(long id) {
         this.tx(

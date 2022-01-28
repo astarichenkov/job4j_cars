@@ -35,15 +35,19 @@
         $(document).ready(function () {
             refreshTable()
         });
+
         function refreshTable() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/cars/ads?id=1',
+                url: 'http://localhost:8080/cars/ads?id=' + id,
                 dataType: 'json'
             }).done(function (data) {
                 for (let item of data) {
-                    let mark = document.getElementById("mark");
-                    mark.value = item.car.mark.name;
+                    document.getElementById("mark").value = item.car.mark.name;
+                    // mark.value = item.car.mark.name;
+                    document.getElementById("model").value = item.car.model.name;
                 }
             }).fail(function (err) {
                 console.log(err);
@@ -120,20 +124,17 @@
                     <input type="text" class="form-control" name="date" id="date">
 
                     <%--                        <img src="${pageContext.request.contextPath}/photo-download" width="100px" height="100px"/>--%>
-                    <div uk-lightbox="animation: fade">
-                        <a href="${pageContext.request.contextPath}/photo-download" data-lightbox="image-1"
-                           data-title="My caption">
-                            <img src="${pageContext.request.contextPath}/photo-download" width="400px" height="200px"/>
-                        </a>
-                        <a href="https://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" data-lightbox="image-1"
-                           data-title="My caption">
-                            <img src="https://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" width="400px" height="200px"/>
-                        </a>
-                    </div>
+
 
                 </div>
                 <%--                    <button type="submit" class="btn btn-primary">Сохранить</button>--%>
                 <%--                </form>--%>
+            </div>
+            <div uk-lightbox="animation: fade">
+                <a href="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}" data-lightbox="image-1"
+                   data-title="My caption">
+                    <img style="max-width: 80%" src="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"/>
+                </a>
             </div>
         </div>
     </div>

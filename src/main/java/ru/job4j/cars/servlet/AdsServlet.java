@@ -64,8 +64,9 @@ public class AdsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         List<Ad> list;
-        if (req.getParameter("id") != null) {
-            list = AdRepository.instOf().findAdById(1L);
+        String id = req.getParameter("id");
+        if (id != null) {
+            list = AdRepository.instOf().findAdById(Long.valueOf(id));
         } else {
             list = AdRepository.instOf().findAll();
         }

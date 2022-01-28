@@ -28,7 +28,7 @@ public class Car {
     private Model model;
 
     @ManyToOne
-    @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MAARK_ID_FK"))
+    @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MARK_ID_FK"))
     private Mark mark;
 
     public Car() {

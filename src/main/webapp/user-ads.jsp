@@ -13,6 +13,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link href="./lightbox2/css/lightbox.css" rel="stylesheet"/>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -26,21 +27,36 @@
             crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./js/index.js"></script>
+<%--    <script src="./js/index.js"></script>--%>
+    <script src="./lightbox2/js/lightbox.js"></script>
+
     <script>
+
+
+    $(document).ready(function () {
+            refreshTable()
+        });
+
         function refreshTable() {
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8080/cars/user-ads',
                 dataType: 'json'
             }).done(function (data) {
+                let btnSold;
+                let btnEdit;
+
                 for (let item of data) {
                     if (item.isSold) {
-                        td = '<td>' +
+                        btnSold = '<td>' +
                             '<img src="./img/sold.jpg" height="100px">' +
                             '</td>'
                     } else {
-                        td = '<td><button class="btn btn-light" onclick="changeStatus(this.value)" value="' + item.id + '">Выполнить</button></td>';
+                        btnSold =   '<td><button class="btn btn-light" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button></td>';
+                        btnEdit =   '<td><button class="btn btn-light" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button></td>';
+                        <%--let onClick = 'window.location.href=' + <%=request.getContextPath()%> + '/ad-view.jsp?id=' + item.id;--%>
+                        // console.log(onClick)
+                        // btn2 = '<td><button class="btn btn-light" onclick="'window.location.href' + onClick + >Редактировать</button></td>';
                     }
                     let user = item.author;
                     let cat = "";
@@ -52,6 +68,7 @@
                     // img2.setAttribute('src', 'http://localhost:8080/cars/photo-download?id=' + item.id);
 
 
+                    url = 'http://localhost:8080/cars/photo-download?id=' + item.id;
                     if (item.isSold) {
                         img = '<img src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;" style = "filter: grayscale(1)">';
                     }
@@ -60,14 +77,27 @@
                         '<td>' + item.description + '</td>' +
                         '<td>' + item.created + '</td>' +
                         // '<td>           </td>' +
-                        '<td>' + img + '</td>' +
+                        // '<td>' + img + '</td>' +
+                        '<td>' +
+                            '<div uk-lightbox="animation: fade">' +
+                                '<a href="' + url + '" data-lightbox="image-1"' +
+                                   'data-title="My caption">' +
+                                    img +
+                                '</a>' +
+                            '</div>' +
+                        '</td>'+
                         // '<td>' + cat + '</td>' +
-                        td +
+                        btnSold +
+                        btnEdit +
                         '</tr>');
                 }
             }).fail(function (err) {
                 console.log(err);
             });
+        }
+
+        function edit(val) {
+            window.location.href = 'http://localhost:8080/cars/ad-view.jsp?id=' + val;
         }
 
         function changeStatus(val) {

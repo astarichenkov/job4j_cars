@@ -22,12 +22,12 @@
             crossorigin="anonymous"></script>
     <script>
 
-        $(document).ready(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            let formInput = document.getElementById("fileId");
-            formInput.name = id;
-        });
+        // $(document).ready(function () {
+        //     const urlParams = new URLSearchParams(window.location.search);
+        //     const id = urlParams.get('id');
+        //     let formInput = document.getElementById("fileId");
+        //     formInput.name = id;
+        // });
     </script>
 
     <title>Car sales</title>
