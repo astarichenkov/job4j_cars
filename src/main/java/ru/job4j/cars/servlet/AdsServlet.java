@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import ru.job4j.cars.model.*;
+import ru.job4j.cars.repository.AdRepository;
+import ru.job4j.cars.repository.CarRepository;
+import ru.job4j.cars.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/ads")
@@ -38,16 +40,16 @@ public class AdsServlet extends HttpServlet {
         boolean isBroken = jobj.get("isBroken").getAsBoolean();
         int price = jobj.get("price").getAsInt();
 
-        Mark mark = AdRepository.instOf().findMarkById(jobj.get("mark").getAsInt());
-        Model model = AdRepository.instOf().findModelById(jobj.get("model").getAsInt());
-        BodyType body = AdRepository.instOf().findBodyById(jobj.get("body").getAsInt());
+        Mark mark = CarRepository.instOf().findMarkById(jobj.get("mark").getAsInt());
+        Model model = CarRepository.instOf().findModelById(jobj.get("model").getAsInt());
+        BodyType body = CarRepository.instOf().findBodyById(jobj.get("body").getAsInt());
         City city = AdRepository.instOf().findCityById(jobj.get("city").getAsLong());
 
         Car car = Car.of(mark, model, body, year, power, mileage,  isBroken);
-        AdRepository.instOf().add(car);
+        CarRepository.instOf().add(car);
 
         UserDto userDto = (UserDto) req.getSession().getAttribute("user");
-        User user = AdRepository.instOf().findUserByName(userDto.getName());
+        User user = UserRepository.instOf().findByName(userDto.getName());
 
         Ad ad = Ad.of(car, description, city, user, price);
         AdRepository.instOf().add(ad);

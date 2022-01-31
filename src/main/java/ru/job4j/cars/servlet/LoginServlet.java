@@ -1,8 +1,8 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.model.AdRepository;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.model.UserDto;
+import ru.job4j.cars.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
-        User user = AdRepository.instOf().findUserByPhoneAndPassword(phone, password);
+        User user = UserRepository.instOf().findByPhoneAndPassword(phone, password);
         if (user != null) {
             UserDto userDto = UserDto.builder()
                     .id(user.getId())

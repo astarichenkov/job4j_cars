@@ -5,7 +5,7 @@
 <%@ page import="ru.job4j.cars.model.Car" %>
 <%@ page import="ru.job4j.cars.model.City" %>
 <%@ page import="java.util.List" %>
-<%@ page import="ru.job4j.cars.model.AdRepository" %>
+<%@ page import="ru.job4j.cars.repository.AdRepository" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

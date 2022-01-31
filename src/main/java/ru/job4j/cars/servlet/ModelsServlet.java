@@ -2,8 +2,9 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.cars.model.AdRepository;
+import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.model.Model;
+import ru.job4j.cars.repository.CarRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ public class ModelsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        List<Model> list = AdRepository.instOf().getModels(id);
+        List<Model> list = CarRepository.instOf().getModelsById(id);
         String json = GSON.toJson(list);
         req.setAttribute("json", json);
         req.getRequestDispatcher("/writer")

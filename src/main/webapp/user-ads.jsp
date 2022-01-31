@@ -48,12 +48,11 @@
 
                 for (let item of data) {
                     if (item.isSold) {
-                        btnSold = '<td>' +
-                            '<img src="./img/sold.jpg" height="100px">' +
-                            '</td>'
+                        btnSold = '<img src="./img/sold.jpg" height="100px">';
+                        btnEdit = ""
                     } else {
-                        btnSold =   '<td><button class="btn btn-light" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button></td>';
-                        btnEdit =   '<td><button class="btn btn-light" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button></td>';
+                        btnSold =   '<button class="btn btn-light" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button>';
+                        btnEdit =   '<button class="btn btn-light" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button>';
                         <%--let onClick = 'window.location.href=' + <%=request.getContextPath()%> + '/ad-view.jsp?id=' + item.id;--%>
                         // console.log(onClick)
                         // btn2 = '<td><button class="btn btn-light" onclick="'window.location.href' + onClick + >Редактировать</button></td>';
@@ -86,9 +85,11 @@
                                 '</a>' +
                             '</div>' +
                         '</td>'+
-                        // '<td>' + cat + '</td>' +
+                        '<td>'+
                         btnSold +
                         btnEdit +
+                        '</td>'+
+
                         '</tr>');
                 }
             }).fail(function (err) {
@@ -155,7 +156,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Задания
+                Мои объявления
             </div>
             <div class="card-body">
                 <table class="table" id="table">

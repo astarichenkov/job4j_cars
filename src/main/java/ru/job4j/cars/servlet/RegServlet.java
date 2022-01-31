@@ -1,7 +1,8 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.model.AdRepository;
+import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.model.User;
+import ru.job4j.cars.repository.UserRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class RegServlet extends HttpServlet {
         String name = req.getParameter("name");
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
-        AdRepository.instOf().add(User.of(name, phone, password));
+        UserRepository.instOf().add(User.of(name, phone, password));
         req.setAttribute("register", "Регистрация завершена");
         req.getRequestDispatcher("reg.jsp").forward(req, resp);
     }

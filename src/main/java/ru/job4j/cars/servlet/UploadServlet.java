@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet("/photo-upload.do")
 public class UploadServlet extends HttpServlet {
-    private final int FOLDER_NAME_FIELD_ID = 0;
+//    private final int FOLDER_NAME_FIELD_ID = 0;
 //    private static final Logger LOG = LoggerFactory.getLogger(DbStore.class.getName());
 
     @Override
