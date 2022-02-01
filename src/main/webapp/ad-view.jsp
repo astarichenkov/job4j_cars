@@ -45,9 +45,14 @@
                 dataType: 'json'
             }).done(function (data) {
                 for (let item of data) {
-                    document.getElementById("mark").value = item.car.mark.name;
-                    // mark.value = item.car.mark.name;
-                    document.getElementById("model").value = item.car.model.name;
+                    let car = item.car;
+                    document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: <span>' + car.mark.name;
+                    // document.getElementById("mark").innerHTML = car.mark.name;
+                    document.getElementById("model").innerHTML = car.model.name;
+                    document.getElementById("mileage").innerHTML = car.mileage;
+                    document.getElementById("price").innerHTML = item.price;
+                    document.getElementById("isBroken").innerHTML = car.isBroken;
+                    document.getElementById("city").innerHTML = item.city.name;
                 }
             }).fail(function (err) {
                 console.log(err);
@@ -94,46 +99,92 @@
                 <%--                <% } %>--%>
                 Просмотр объявления
             </div>
-            <div class="card-body">
-                <%--                <form action="" method="post">--%>
-                <div class="form-group">
-
-                    <label>Марка</label>
-                    <input type="text" class="form-control" name="mark" id="mark">
-
-                    <label>Модель</label>
-                    <input type="text" class="form-control" name="model" id="model">
-
-                    <label>Описание</label>
-                    <input type="text" class="form-control" name="description" id="description">
-
-                    <label>Пробег</label>
-                    <input type="text" class="form-control" name="mileage" id="mileage">
-
-                    <label>Цена</label>
-                    <input type="text" class="form-control" name="price" id="price">
-
-                    <label>Город</label>
-                    <select class="form-control" name="city" id="city">
-                        <option>
-                            <%--                                <%=candidate.getCity()%>--%>
-                        </option>
-                    </select>
-
-                    <label>Дата объявления</label>
-                    <input type="text" class="form-control" name="date" id="date">
-
-                    <%--                        <img src="${pageContext.request.contextPath}/photo-download" width="100px" height="100px"/>--%>
-
-
+            <div class=item-view-block>
+                <div class="item-params">
+                    <ul class="list-group">
+                        <li class="list-group-item"  id="mark">
+<%--                                <span class="item-params-label">--%>
+<%--                                    Марка автомобиля:--%>
+<%--                                </span>--%>
+                        </li>
+                        <li class="list-group-item">
+                                <span class="item-params-label" id="model">
+                                    Модель:
+                                </span>
+                        </li>
+<%--                        <li class="item-params-list-item">--%>
+<%--                                <span class="item-params-label" id="description">--%>
+<%--                                    Описане--%>
+<%--                                </span>--%>
+<%--                        </li>--%>
+                        <li class="list-group-item">
+                                <span class="item-params-label" id="mileage">
+                                    Пробег:
+                                </span>
+                        </li>
+                        <li class="list-group-item">
+                                <span class="item-params-label" id="price">
+                                    Цена:
+                                </span>
+                        </li>
+                        <li class="list-group-item">
+                                <span class="item-params-label" id="isBroken">
+                                    Состояние:
+                                </span>
+                        </li>
+                        <li class="list-group-item">
+                                <span class="item-params-label" id="city">
+                                    Город:
+                                </span>
+                        </li>
+                    </ul>
                 </div>
-                <%--                    <button type="submit" class="btn btn-primary">Сохранить</button>--%>
-                <%--                </form>--%>
             </div>
+
+
+            <%--            </div>--%>
+            <%--            <div class="card-body">--%>
+            <%--                &lt;%&ndash;                <form action="" method="post">&ndash;%&gt;--%>
+            <%--                <div class="form-group">--%>
+
+            <%--                    <label>Марка</label>--%>
+            <%--                    <input type="text" class="form-control" name="mark" id="mark">--%>
+
+            <%--                    <label>Модель</label>--%>
+            <%--                    <input type="text" class="form-control" name="model" id="model">--%>
+
+            <%--                    <label>Описание</label>--%>
+            <%--                    <input type="text" class="form-control" name="description" id="description">--%>
+
+            <%--                    <label>Пробег</label>--%>
+            <%--                    <input type="text" class="form-control" name="mileage" id="mileage">--%>
+
+            <%--                    <label>Цена</label>--%>
+            <%--                    <input type="text" class="form-control" name="price" id="price">--%>
+
+            <%--                    <label>Город</label>--%>
+            <%--                    <select class="form-control" name="city" id="city">--%>
+            <%--                        <option>--%>
+            <%--                            &lt;%&ndash;                                <%=candidate.getCity()%>&ndash;%&gt;--%>
+            <%--                        </option>--%>
+            <%--                    </select>--%>
+
+            <%--                    <label>Дата объявления</label>--%>
+            <%--                    <input type="text" class="form-control" name="date" id="date">--%>
+
+            <%--                    &lt;%&ndash;                        <img src="${pageContext.request.contextPath}/photo-download" width="100px" height="100px"/>&ndash;%&gt;--%>
+
+
+            <%--                </div>--%>
+            <%--                &lt;%&ndash;                    <button type="submit" class="btn btn-primary">Сохранить</button>&ndash;%&gt;--%>
+            <%--                &lt;%&ndash;                </form>&ndash;%&gt;--%>
+            <%--            </div>--%>
             <div uk-lightbox="animation: fade">
-                <a href="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}" data-lightbox="image-1"
+                <a href="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"
+                   data-lightbox="image-1"
                    data-title="My caption">
-                    <img style="max-width: 80%" src="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"/>
+                    <img style="max-width: 80%"
+                         src="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"/>
                 </a>
             </div>
         </div>
