@@ -7,6 +7,7 @@ import ru.job4j.cars.model.*;
 import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.repository.CarRepository;
 import ru.job4j.cars.repository.UserRepository;
+//import ru.job4j.cars.service.AdService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +30,7 @@ public class AdsServlet extends HttpServlet {
         while (req.getReader().ready()) {
             sb.append(req.getReader().readLine());
         }
-        System.out.println("SBUILDER " + sb.toString());
+        System.out.println("SBUILDER " + sb);
 
         JsonObject jobj = new Gson().fromJson(String.valueOf(sb), JsonObject.class);
         String description = jobj.get("description").getAsString();
@@ -48,12 +49,11 @@ public class AdsServlet extends HttpServlet {
         Car car = Car.of(mark, model, body, year, power, mileage,  isBroken);
         CarRepository.instOf().add(car);
 
-        UserDto userDto = (UserDto) req.getSession().getAttribute("user");
-        User user = UserRepository.instOf().findByName(userDto.getName());
+        String username = req.getSession().getAttribute("user").toString();
+        User user = UserRepository.instOf().findByName(username);
 
         Ad ad = Ad.of(car, description, city, user, price);
         AdRepository.instOf().add(ad);
-
 
         String json = GSON.toJson(ad.getId());
         resp.setContentType("application/json; charset=utf-8");

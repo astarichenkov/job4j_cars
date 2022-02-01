@@ -1,9 +1,15 @@
 package ru.job4j.cars.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +38,6 @@ public class Ad {
     @ManyToOne
     private Car car;
 
-    public Ad() {
-    }
-
     public static Ad of(Car car, String description, City city, User author, int price) {
         Ad ad = new Ad();
         ad.setCar(car);
@@ -44,92 +47,5 @@ public class Ad {
         ad.setPrice(price);
         ad.setCreated(new Date(System.currentTimeMillis()));
         return ad;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
-    }
-
-    public boolean isSold() {
-        return isSold;
-    }
-
-    public void setSold(boolean sold) {
-        isSold = sold;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    @Override
-    public String toString() {
-        return "Ad{"
-                + "id=" + id
-                + ", created=" + created
-                + ", price=" + price
-                + ", description=" + description
-                + ", photoId=" + photoId
-                + ", isSold=" + isSold
-                + ", city=" + city
-                + ", author=" + author
-                + ", car=" + car
-                + '}';
     }
 }

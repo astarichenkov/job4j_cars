@@ -5,7 +5,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,24 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/photo-upload.do")
 public class UploadServlet extends HttpServlet {
-//    private final int FOLDER_NAME_FIELD_ID = 0;
-//    private static final Logger LOG = LoggerFactory.getLogger(DbStore.class.getName());
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> images = new ArrayList<>();
-        for (File name : new File("c:\\images\\").listFiles()) {
-            images.add(name.getName());
-        }
-        req.setAttribute("images", images);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/upload.jsp");
-        dispatcher.forward(req, resp);
-    }
+    private static final String IMAGES_FOLDER = "c:\\images\\cars\\";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,8 +31,7 @@ public class UploadServlet extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List<FileItem> items = upload.parseRequest(req);
-//            String subFolder = items.get(FOLDER_NAME_FIELD_ID).getFieldName();
-            File folder = new File("c:\\images\\cars\\");
+            File folder = new File(IMAGES_FOLDER);
             if (!folder.exists()) {
                 folder.mkdir();
             }
@@ -61,9 +47,8 @@ public class UploadServlet extends HttpServlet {
                 }
             }
         } catch (FileUploadException e) {
-//            LOG.error("Message", e);
+            e.printStackTrace();
         }
-//        doGet(req, resp);
         resp.sendRedirect(req.getContextPath() + "/ad-view.jsp?id=" + id);
     }
 }

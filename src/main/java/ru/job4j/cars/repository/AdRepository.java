@@ -28,10 +28,11 @@ public class AdRepository implements AutoCloseable {
         return Lazy.INST;
     }
 
-    public void chandeStatus(long id) {
+    public void changeStatus(long id, long userId) {
         this.tx(
-                session -> session.createQuery("UPDATE Ad ad set ad.isSold = true WHERE ad.id = :id")
+                session -> session.createQuery("UPDATE Ad ad set ad.isSold = true WHERE ad.id = :id AND ad.author.id = :userId")
                         .setParameter("id", id)
+                        .setParameter("userId", userId)
                         .executeUpdate());
     }
 
@@ -90,6 +91,7 @@ public class AdRepository implements AutoCloseable {
         );
     }
 
+    @SuppressWarnings("unchecked")
     public List<Ad> findByPeriod(Date start, Date end) {
         return this.tx(
                 session -> session.createQuery("select distinct ad from Ad ad "
@@ -127,6 +129,7 @@ public class AdRepository implements AutoCloseable {
         );
     }
 
+    @SuppressWarnings("unchecked")
     public List<City> getAllCities() {
         return this.tx(
                 session -> session.createQuery("from City").list()

@@ -1,6 +1,5 @@
 package ru.job4j.cars.servlet;
 
-import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.model.User;
 import ru.job4j.cars.repository.UserRepository;
 

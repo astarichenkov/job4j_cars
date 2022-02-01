@@ -48,10 +48,6 @@ public class UserRepository implements AutoCloseable {
                         .uniqueResult());
     }
 
-
-
-
-
     private <T> T tx(final Function<Session, T> command) {
         Session session = sf.openSession();
         session.beginTransaction();

@@ -3,9 +3,17 @@ package ru.job4j.cars.utils;
 import java.io.File;
 
 public class FileUtils {
+    private static final FileUtils INST = new FileUtils();
     private static final String DIRECTORY = "c:\\images\\cars\\";
 
-    public static File getFilesFromFolder(String id) {
+    private FileUtils() {
+    }
+
+    public static FileUtils instOf() {
+        return INST;
+    }
+
+    public File getFilesFromFolder(String id) {
         File targetFile = null;
         for (File file : new File(DIRECTORY).listFiles()) {
             if ((id + ".jpg").equalsIgnoreCase(file.getName())
@@ -15,12 +23,5 @@ public class FileUtils {
             }
         }
         return targetFile;
-    }
-
-
-    public static void main(String[] args) {
-        File file = FileUtils.getFilesFromFolder("66");
-        System.out.println(file.getAbsolutePath());
-        System.out.println(file.getName());
     }
 }

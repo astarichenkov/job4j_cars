@@ -1,13 +1,14 @@
 package ru.job4j.cars.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@Table(name = "car")
-
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Car {
 
     @Id
@@ -31,9 +32,6 @@ public class Car {
     @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MARK_ID_FK"))
     private Mark mark;
 
-    public Car() {
-    }
-
     public static Car of(Mark mark, Model model, BodyType bodyType, int year, int power, int mileage, boolean isBroken) {
         Car car = new Car();
         car.mark = mark;
@@ -44,28 +42,5 @@ public class Car {
         car.mileage = mileage;
         car.isBroken = isBroken;
         return car;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Car{"
-                + "id=" + id
-                + ", year=" + year
-                + ", mileage=" + mileage
-                + ", isBroken=" + isBroken
-                + ", power =" + power
-                + ", bodyType=" + bodyType
-                + ", model=" + model
-                + ", mark=" + mark
-                + '}';
     }
 }

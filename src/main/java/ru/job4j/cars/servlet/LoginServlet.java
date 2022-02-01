@@ -1,7 +1,7 @@
 package ru.job4j.cars.servlet;
 
 import ru.job4j.cars.model.User;
-import ru.job4j.cars.model.UserDto;
+import ru.job4j.cars.dto.UserDto;
 import ru.job4j.cars.repository.UserRepository;
 
 import javax.servlet.ServletException;

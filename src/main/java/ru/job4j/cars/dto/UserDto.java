@@ -1,13 +1,9 @@
-package ru.job4j.cars.model;
+package ru.job4j.cars.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class UserDto {
     long id;

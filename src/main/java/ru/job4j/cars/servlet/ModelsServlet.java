@@ -2,7 +2,6 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.model.Model;
 import ru.job4j.cars.repository.CarRepository;
 

@@ -2,12 +2,14 @@ package ru.job4j.cars.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "users")
 public class User {
     @Id
@@ -28,15 +30,5 @@ public class User {
         user.phone = phone;
         user.password = password;
         return user;
-    }
-
-    @Override
-    public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", password='" + password + '\''
-                + ", phone='" + phone + '\''
-                + '}';
     }
 }

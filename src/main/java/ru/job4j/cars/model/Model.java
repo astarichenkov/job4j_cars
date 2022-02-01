@@ -6,12 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-@Builder
-//@Table(name = "models")
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

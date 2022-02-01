@@ -39,8 +39,8 @@ public class HbmRun {
 
             Car carOne = Car.of(markOne, modelOne, bodyOne, 2020, 150, 76000, true);
 
-            City cityOne = new City("Нижний Новгород");
-            City cityTwo = new City("Москва");
+            City cityOne = City.of("Нижний Новгород");
+            City cityTwo = City.of("Москва");
 
             User userOne = User.of("Anton", "+79506024452", "123");
             User userTwo = User.of("Ivan", "+79990005555", "123");
