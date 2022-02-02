@@ -1,0 +1,20 @@
+.btn {
+    margin-bottom: 20px;
+    width: 150px;
+}
+.buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img.sold-status {
+    width: 180px;
+}
+
+.car-photo {
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0,0,0,.125)
+
+}

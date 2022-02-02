@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link href="./lightbox2/css/lightbox.css" rel="stylesheet"/>
+    <link href="./css/user-ads.css" rel="stylesheet"/>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -48,35 +49,26 @@
 
                 for (let item of data) {
                     if (item.isSold) {
-                        btnSold = '<img src="./img/sold.jpg" height="100px">';
+                        btnSold = '<img class="sold-status" src="./img/sold.jpg">';
                         btnEdit = ""
                     } else {
-                        btnSold =   '<button class="btn btn-light" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button>';
-                        btnEdit =   '<button class="btn btn-light" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button>';
-                        <%--let onClick = 'window.location.href=' + <%=request.getContextPath()%> + '/ad-view.jsp?id=' + item.id;--%>
-                        // console.log(onClick)
-                        // btn2 = '<td><button class="btn btn-light" onclick="'window.location.href' + onClick + >Редактировать</button></td>';
+                        btnSold =   '<button class="btn btn-success" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button>';
+                        btnEdit =   '<button class="btn btn-info" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button>';
                     }
                     let user = item.author;
                     let cat = "";
 
 
-                    let img = '<img src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;">';
-                    // let img2 = document.createElement('img');
-                    // img2.style.filter = "grayscale(100%)";
-                    // img2.setAttribute('src', 'http://localhost:8080/cars/photo-download?id=' + item.id);
-
+                    let img = '<img class="car-photo" src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;">';
 
                     url = 'http://localhost:8080/cars/photo-download?id=' + item.id;
                     if (item.isSold) {
-                        img = '<img src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;" style = "filter: grayscale(1)">';
+                        img = '<img class="car-photo" src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;" style = "filter: grayscale(1)">';
                     }
                     $('#table tr:last').after('<tr>' +
                         '<td>' + item.id + '</td>' +
                         '<td>' + item.description + '</td>' +
                         '<td>' + item.created + '</td>' +
-                        // '<td>           </td>' +
-                        // '<td>' + img + '</td>' +
                         '<td>' +
                             '<div uk-lightbox="animation: fade">' +
                                 '<a href="' + url + '" data-lightbox="image-1"' +
@@ -86,8 +78,10 @@
                             '</div>' +
                         '</td>'+
                         '<td>'+
-                        btnSold +
-                        btnEdit +
+                            '<div class="buttons-wrapper">'+
+                                btnSold +
+                                btnEdit +
+                            '</div>' +
                         '</td>'+
 
                         '</tr>');

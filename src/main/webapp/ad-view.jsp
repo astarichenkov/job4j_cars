@@ -60,10 +60,13 @@
                     document.getElementById("c-header").innerHTML = car.mark.name + ' ' + car.model.name + ', ' + item.price + ' ₽';
                     document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: </span>' + car.mark.name;
                     document.getElementById("model").innerHTML = '<span class="item-params-label">Модель: </span>' + car.model.name;
+                    document.getElementById("year").innerHTML = '<span class="item-params-label">Год выпуска: </span>' + car.year;
+                    document.getElementById("power").innerHTML = '<span class="item-params-label">Мощность двигателя: </span>' + car.power;
                     document.getElementById("mileage").innerHTML = '<span class="item-params-label">Пробег: </span>' + car.mileage + ' км';
                     document.getElementById("price").innerHTML = '<span class="item-params-label">Цена: </span>' + item.price + ' ₽';
                     document.getElementById("isBroken").innerHTML = '<span class="item-params-label">Битый / не на ходу: </span>' + isBroken;
                     document.getElementById("city").innerHTML = '<span class="item-params-label">Город: </span>' + item.city.name;
+                    document.getElementById("description").innerText = item.description;
                     let btn = document.getElementById("phone");
                     btn.value = item.author.phone;
                 }
@@ -112,6 +115,8 @@
                     <ul class="list-group">
                         <li class="list-group-item" id="mark"></li>
                         <li class="list-group-item" id="model"></li>
+                        <li class="list-group-item" id="year"></li>
+                        <li class="list-group-item" id="power"></li>
                         <li class="list-group-item" id="mileage"></li>
                         <li class="list-group-item" id="price"></li>
                         <li class="list-group-item" id="isBroken"></li>
@@ -134,7 +139,7 @@
             <div class="card-header" id="description-header">
                 Описание
             </div>
-            <p class="">Продается лада веста. Не бита, не крашена.</p>
+            <p class="description" id="description"></p>
 
         </div>
         <p></p>

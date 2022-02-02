@@ -10,10 +10,12 @@ import java.util.Date;
 public class AdDto {
     private String mark;
     private String model;
-    private String description;
+    private int year;
+    private int power;
     private int mileage;
     private int price;
-    private String city;
     private boolean isBroken;
+    private String city;
+    private String description;
     private Date date;
 }
