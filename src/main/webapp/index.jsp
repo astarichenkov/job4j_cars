@@ -71,7 +71,7 @@
                 <table class="table" id="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+<%--                        <th scope="col">#</th>--%>
                         <th scope="col">Описание</th>
                         <th scope="col">Дата</th>
                         <th scope="col">Автор</th>

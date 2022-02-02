@@ -3,11 +3,11 @@ package ru.job4j.cars.servlet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import ru.job4j.cars.dto.AdDto;
 import ru.job4j.cars.model.*;
 import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.repository.CarRepository;
 import ru.job4j.cars.repository.UserRepository;
-//import ru.job4j.cars.service.AdService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+//import ru.job4j.cars.service.AdService;
 
 @WebServlet("/ads")
 public class AdsServlet extends HttpServlet {
@@ -46,7 +48,7 @@ public class AdsServlet extends HttpServlet {
         BodyType body = CarRepository.instOf().findBodyById(jobj.get("body").getAsInt());
         City city = AdRepository.instOf().findCityById(jobj.get("city").getAsLong());
 
-        Car car = Car.of(mark, model, body, year, power, mileage,  isBroken);
+        Car car = Car.of(mark, model, body, year, power, mileage, isBroken);
         CarRepository.instOf().add(car);
 
         String username = req.getSession().getAttribute("user").toString();
@@ -72,7 +74,8 @@ public class AdsServlet extends HttpServlet {
         } else {
             list = AdRepository.instOf().findAll();
         }
-        String json = GSON.toJson(list);
+        List<AdDto> dtoList = AdDto.convertListToDto(list);
+        String json = GSON.toJson(dtoList);
         req.setAttribute("json", json);
         req.getRequestDispatcher("/writer")
                 .forward(req, resp);

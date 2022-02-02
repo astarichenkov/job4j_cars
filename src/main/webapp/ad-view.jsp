@@ -51,24 +51,24 @@
                 dataType: 'json'
             }).done(function (data) {
                 for (let item of data) {
-                    let car = item.car;
+                    // let car = item.car;
                     let isBroken = 'нет'
-                    if (car.isBroken) {
+                    if (item.isBroken) {
                         isBroken = 'да';
                     }
 
-                    document.getElementById("c-header").innerHTML = car.mark.name + ' ' + car.model.name + ', ' + item.price + ' ₽';
-                    document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: </span>' + car.mark.name;
-                    document.getElementById("model").innerHTML = '<span class="item-params-label">Модель: </span>' + car.model.name;
-                    document.getElementById("year").innerHTML = '<span class="item-params-label">Год выпуска: </span>' + car.year;
-                    document.getElementById("power").innerHTML = '<span class="item-params-label">Мощность двигателя: </span>' + car.power;
-                    document.getElementById("mileage").innerHTML = '<span class="item-params-label">Пробег: </span>' + car.mileage + ' км';
+                    document.getElementById("c-header").innerHTML = item.mark + ' ' + item.model + ', ' + item.price + ' ₽';
+                    document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: </span>' + item.mark;
+                    document.getElementById("model").innerHTML = '<span class="item-params-label">Модель: </span>' + item.model;
+                    document.getElementById("year").innerHTML = '<span class="item-params-label">Год выпуска: </span>' + item.year;
+                    document.getElementById("power").innerHTML = '<span class="item-params-label">Мощность двигателя: </span>' + item.power;
+                    document.getElementById("mileage").innerHTML = '<span class="item-params-label">Пробег: </span>' + item.mileage + ' км';
                     document.getElementById("price").innerHTML = '<span class="item-params-label">Цена: </span>' + item.price + ' ₽';
                     document.getElementById("isBroken").innerHTML = '<span class="item-params-label">Битый / не на ходу: </span>' + isBroken;
-                    document.getElementById("city").innerHTML = '<span class="item-params-label">Город: </span>' + item.city.name;
+                    document.getElementById("city").innerHTML = '<span class="item-params-label">Город: </span>' + item.city;
                     document.getElementById("description").innerText = item.description;
                     let btn = document.getElementById("phone");
-                    btn.value = item.author.phone;
+                    btn.value = item.phone;
                 }
             }).fail(function (err) {
                 console.log(err);

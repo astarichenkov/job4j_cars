@@ -67,8 +67,19 @@
                     }
                     $('#table tr:last').after('<tr>' +
                         '<td>' + item.id + '</td>' +
-                        '<td>' + item.description + '</td>' +
-                        '<td>' + item.created + '</td>' +
+                        '<td>' +
+                        '<div class="car-info">' +
+                            '<a href="http://localhost:8080/cars/ad-view.jsp?id=' + item.id + '">' +
+                                '<p class="car-main-info">' + item.mark + ' ' + item.model + ', ' + item.price + ' ₽' + '</p>' +
+                            '</a>' +
+                            '<p class="car-secondary-info">' + 'Пробег: ' + item.mileage + ', двигатель ' + item.power + ' лс </p>' +
+                            '<p class="car-description">' + item.description + '</p>' +
+                        '</div>' +
+
+
+
+                        '</td>' +
+                        '<td>' + item.date + '</td>' +
                         '<td>' +
                             '<div uk-lightbox="animation: fade">' +
                                 '<a href="' + url + '" data-lightbox="image-1"' +

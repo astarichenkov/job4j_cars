@@ -181,7 +181,7 @@
                         <input type="text" class="form-control" name="mileage" id="mileage" value="273000">
 
                         <label>Битая</label>
-                        <input type="checkbox" class="form-control" name="isBroken" id="isBroken">
+                        <input type="checkbox" class="form-check" style="width: 20px; height: 20px" name="isBroken" id="isBroken">
 
                         <label>Цена</label>
                         <input type="text" class="form-control" name="price" id="price" value="120000">

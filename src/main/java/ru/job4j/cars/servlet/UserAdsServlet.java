@@ -2,8 +2,9 @@ package ru.job4j.cars.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ru.job4j.cars.dto.AdDto;
 import ru.job4j.cars.dto.UserDto;
-import ru.job4j.cars.model.*;
+import ru.job4j.cars.model.Ad;
 import ru.job4j.cars.repository.AdRepository;
 
 import javax.servlet.ServletException;
@@ -23,7 +24,8 @@ public class UserAdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         UserDto userDto = (UserDto) req.getSession().getAttribute("user");
         List<Ad> list = AdRepository.instOf().findAdsByUserId(userDto.getId());
-        String json = GSON.toJson(list);
+        List<AdDto> dtoList = AdDto.convertListToDto(list);
+        String json = GSON.toJson(dtoList);
         req.setAttribute("json", json);
         req.getRequestDispatcher("/writer")
                 .forward(req, resp);
