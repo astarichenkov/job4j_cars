@@ -13,6 +13,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link href="./css/ad-view.css" rel="stylesheet"/>
     <link href="./lightbox2/css/lightbox.css" rel="stylesheet"/>
 
 
@@ -36,6 +37,11 @@
             refreshTable()
         });
 
+        function showPhone(value) {
+            let btn = document.getElementById("phone");
+            btn.innerHTML = value;
+        }
+
         function refreshTable() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
@@ -46,13 +52,20 @@
             }).done(function (data) {
                 for (let item of data) {
                     let car = item.car;
-                    document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: <span>' + car.mark.name;
-                    // document.getElementById("mark").innerHTML = car.mark.name;
-                    document.getElementById("model").innerHTML = car.model.name;
-                    document.getElementById("mileage").innerHTML = car.mileage;
-                    document.getElementById("price").innerHTML = item.price;
-                    document.getElementById("isBroken").innerHTML = car.isBroken;
-                    document.getElementById("city").innerHTML = item.city.name;
+                    let isBroken = 'нет'
+                    if (car.isBroken) {
+                        isBroken = 'да';
+                    }
+
+                    document.getElementById("c-header").innerHTML = car.mark.name + ' ' + car.model.name + ', ' + item.price + ' ₽';
+                    document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: </span>' + car.mark.name;
+                    document.getElementById("model").innerHTML = '<span class="item-params-label">Модель: </span>' + car.model.name;
+                    document.getElementById("mileage").innerHTML = '<span class="item-params-label">Пробег: </span>' + car.mileage + ' км';
+                    document.getElementById("price").innerHTML = '<span class="item-params-label">Цена: </span>' + item.price + ' ₽';
+                    document.getElementById("isBroken").innerHTML = '<span class="item-params-label">Битый / не на ходу: </span>' + isBroken;
+                    document.getElementById("city").innerHTML = '<span class="item-params-label">Город: </span>' + item.city.name;
+                    let btn = document.getElementById("phone");
+                    btn.value = item.author.phone;
                 }
             }).fail(function (err) {
                 console.log(err);
@@ -91,104 +104,42 @@
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
-            <div class="card-header">
-                <%--                <% if (id == null) { %>--%>
-                <%--                Новый кандидат.--%>
-                <%--                <% } else { %>--%>
-                <%--                Редактирование кандидата.--%>
-                <%--                <% } %>--%>
+            <div class="card-header" id="c-header">
                 Просмотр объявления
             </div>
             <div class=item-view-block>
                 <div class="item-params">
                     <ul class="list-group">
-                        <li class="list-group-item"  id="mark">
-<%--                                <span class="item-params-label">--%>
-<%--                                    Марка автомобиля:--%>
-<%--                                </span>--%>
-                        </li>
+                        <li class="list-group-item" id="mark"></li>
+                        <li class="list-group-item" id="model"></li>
+                        <li class="list-group-item" id="mileage"></li>
+                        <li class="list-group-item" id="price"></li>
+                        <li class="list-group-item" id="isBroken"></li>
+                        <li class="list-group-item" id="city"></li>
                         <li class="list-group-item">
-                                <span class="item-params-label" id="model">
-                                    Модель:
-                                </span>
-                        </li>
-<%--                        <li class="item-params-list-item">--%>
-<%--                                <span class="item-params-label" id="description">--%>
-<%--                                    Описане--%>
-<%--                                </span>--%>
-<%--                        </li>--%>
-                        <li class="list-group-item">
-                                <span class="item-params-label" id="mileage">
-                                    Пробег:
-                                </span>
-                        </li>
-                        <li class="list-group-item">
-                                <span class="item-params-label" id="price">
-                                    Цена:
-                                </span>
-                        </li>
-                        <li class="list-group-item">
-                                <span class="item-params-label" id="isBroken">
-                                    Состояние:
-                                </span>
-                        </li>
-                        <li class="list-group-item">
-                                <span class="item-params-label" id="city">
-                                    Город:
-                                </span>
+                            <button class="btn btn-success" id="phone" onclick="showPhone(this.value)">Позвонить
+                            </button>
                         </li>
                     </ul>
                 </div>
+                <div class="car-photo" uk-lightbox="animation: fade">
+                    <a href="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"
+                       data-lightbox="image-1"
+                       data-title="My caption">
+                        <img style="max-width: 100%"
+                             src="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"/>
+                    </a>
+                </div>
             </div>
-
-
-            <%--            </div>--%>
-            <%--            <div class="card-body">--%>
-            <%--                &lt;%&ndash;                <form action="" method="post">&ndash;%&gt;--%>
-            <%--                <div class="form-group">--%>
-
-            <%--                    <label>Марка</label>--%>
-            <%--                    <input type="text" class="form-control" name="mark" id="mark">--%>
-
-            <%--                    <label>Модель</label>--%>
-            <%--                    <input type="text" class="form-control" name="model" id="model">--%>
-
-            <%--                    <label>Описание</label>--%>
-            <%--                    <input type="text" class="form-control" name="description" id="description">--%>
-
-            <%--                    <label>Пробег</label>--%>
-            <%--                    <input type="text" class="form-control" name="mileage" id="mileage">--%>
-
-            <%--                    <label>Цена</label>--%>
-            <%--                    <input type="text" class="form-control" name="price" id="price">--%>
-
-            <%--                    <label>Город</label>--%>
-            <%--                    <select class="form-control" name="city" id="city">--%>
-            <%--                        <option>--%>
-            <%--                            &lt;%&ndash;                                <%=candidate.getCity()%>&ndash;%&gt;--%>
-            <%--                        </option>--%>
-            <%--                    </select>--%>
-
-            <%--                    <label>Дата объявления</label>--%>
-            <%--                    <input type="text" class="form-control" name="date" id="date">--%>
-
-            <%--                    &lt;%&ndash;                        <img src="${pageContext.request.contextPath}/photo-download" width="100px" height="100px"/>&ndash;%&gt;--%>
-
-
-            <%--                </div>--%>
-            <%--                &lt;%&ndash;                    <button type="submit" class="btn btn-primary">Сохранить</button>&ndash;%&gt;--%>
-            <%--                &lt;%&ndash;                </form>&ndash;%&gt;--%>
-            <%--            </div>--%>
-            <div uk-lightbox="animation: fade">
-                <a href="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"
-                   data-lightbox="image-1"
-                   data-title="My caption">
-                    <img style="max-width: 80%"
-                         src="${pageContext.request.contextPath}/photo-download?id=${pageContext.request.getParameter("id")}"/>
-                </a>
+            <div class="card-header" id="description-header">
+                Описание
             </div>
+            <p class="">Продается лада веста. Не бита, не крашена.</p>
+
         </div>
+        <p></p>
     </div>
+</div>
 </div>
 
 </body>
