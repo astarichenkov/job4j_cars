@@ -1,0 +1,19 @@
+.left-inputs {
+    margin-right: 100px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    margin-top: 15px;
+}
+
+input.form-check {
+    height: 38px;
+    width: 38px;
+    /*margin-bottom: 20px;*/
+}
+

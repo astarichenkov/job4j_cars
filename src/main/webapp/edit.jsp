@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="./css/edit.css" rel="stylesheet"/>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -157,37 +158,39 @@
                     <%--                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post" enctype="application/x-www-form-urlencoded">--%>
                     <%--                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">--%>
                     <div class="form-group">
+                        <div class="left-inputs">
+                            <label>Описание</label>
+                            <input type="text" class="form-control" name="description" id="description" value="TEST">
+<%--                            <br>--%>
+                            <label>Марка автомобиля</label>
+                            <select class="form-control" id="marksList" name="mark" value="1"
+                                    onchange="fillModels(this.value)"></select>
 
-                        <label>Описание</label>
-                        <input type="text" class="form-control" name="description" id="description" value="TEST">
-                        <br>
-                        <label>Марка автомобиля</label>
-                        <select class="form-control" id="marksList" name="mark" value="1"
-                                onchange="fillModels(this.value)"></select>
+                            <label>Модель автомобиля</label>
+                            <select class="form-control" id="modelsList" name="model" value="1"></select>
 
-                        <label>Модель автомобиля</label>
-                        <select class="form-control" id="modelsList" name="model" value="1"></select>
+                            <label>Тип кузова</label>
+                            <select class="form-control" id="bodiesList" name="body" onchange="" value="1"></select>
 
-                        <label>Тип кузова</label>
-                        <select class="form-control" id="bodiesList" name="body" onchange="" value="1"></select>
+                            <label>Мощность двигателя</label>
+                            <input type="text" class="form-control" name="power" id="power" value="177">
+                        </div>
+                            <div class="right-inputs">
+                            <label>Год выпуска</label>
+                            <input type="text" class="form-control" name="year" id="year" value="2000">
 
-                        <label>Мощность двигателя</label>
-                        <input type="text" class="form-control" name="power" id="power" value="177">
+                            <label>Пробег</label>
+                            <input type="text" class="form-control" name="mileage" id="mileage" value="273000">
 
-                        <label>Год выпуска</label>
-                        <input type="text" class="form-control" name="year" id="year" value="2000">
+                            <label>Битая</label>
+                            <input type="checkbox" class="form-check" name="isBroken" id="isBroken">
 
-                        <label>Пробег</label>
-                        <input type="text" class="form-control" name="mileage" id="mileage" value="273000">
+                            <label>Цена</label>
+                            <input type="text" class="form-control" name="price" id="price" value="120000">
 
-                        <label>Битая</label>
-                        <input type="checkbox" class="form-check" style="width: 20px; height: 20px" name="isBroken" id="isBroken">
-
-                        <label>Цена</label>
-                        <input type="text" class="form-control" name="price" id="price" value="120000">
-
-                        <label>Город</label>
+                            <label>Город</label>
                         <select class="form-control" id="citiesList" name="city" value="1"></select>
+                        </div>
                     </div>
                     <button type="button" class="btn btn-primary" onclick="saveAd()">Сохранить</button>
                 </form>
