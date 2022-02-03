@@ -28,12 +28,9 @@
             crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<%--    <script src="./js/index.js"></script>--%>
     <script src="./lightbox2/js/lightbox.js"></script>
 
     <script>
-
-
     $(document).ready(function () {
             refreshTable()
         });
@@ -55,10 +52,6 @@
                         btnSold =   '<button class="btn btn-success" onclick="changeStatus(this.value)" value="' + item.id + '">Завершить</button>';
                         btnEdit =   '<button class="btn btn-info" onclick="edit(this.value)" value="' + item.id + '">Редактировать</button>';
                     }
-                    let user = item.author;
-                    let cat = "";
-
-
                     let img = '<img class="car-photo" src="http://localhost:8080/cars/photo-download?id=' + item.id + '" height="200px;">';
 
                     url = 'http://localhost:8080/cars/photo-download?id=' + item.id;
@@ -69,15 +62,12 @@
                         '<td>' + item.id + '</td>' +
                         '<td>' +
                         '<div class="car-info">' +
-                            '<a href="http://localhost:8080/cars/ad-view.jsp?id=' + item.id + '">' +
+                            '<a class="car-link" href="http://localhost:8080/cars/ad-view.jsp?id=' + item.id + '">' +
                                 '<p class="car-main-info">' + item.mark + ' ' + item.model + ', ' + item.price + ' ₽' + '</p>' +
                             '</a>' +
                             '<p class="car-secondary-info">' + 'Пробег: ' + item.mileage + ', двигатель ' + item.power + ' лс </p>' +
                             '<p class="car-description">' + item.description + '</p>' +
                         '</div>' +
-
-
-
                         '</td>' +
                         '<td>' + item.date + '</td>' +
                         '<td>' +
@@ -94,7 +84,6 @@
                                 btnEdit +
                             '</div>' +
                         '</td>'+
-
                         '</tr>');
                 }
             }).fail(function (err) {
@@ -168,10 +157,9 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Описание</th>
+                        <th scope="col" style="width: 40%">Описание</th>
                         <th scope="col">Дата</th>
-                        <%--            <th scope="col">Автор</th>--%>
-                        <th scope="col">Фото</th>
+                        <th scope="col" style="max-width: 266px">Фото</th>
                         <th scope="col">Статус</th>
                     </tr>
                     <tr>

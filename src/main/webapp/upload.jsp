@@ -20,15 +20,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <script>
-
-        // $(document).ready(function () {
-        //     const urlParams = new URLSearchParams(window.location.search);
-        //     const id = urlParams.get('id');
-        //     let formInput = document.getElementById("fileId");
-        //     formInput.name = id;
-        // });
-    </script>
 
     <title>Car sales</title>
 </head>
@@ -58,13 +49,9 @@
             <div class="card-header">
                 Загрузить фото
             </div>
-            <%--            <c:set var="id" value="${param.get(id)}"/>--%>
             <div class="card-body">
                 <form action="${pageContext.request.contextPath}/photo-upload.do?id=${pageContext.request.getParameter("id")}" method="post"
-                <%--                <form action="" method="post"--%>
                       enctype="multipart/form-data" id="upload">
-<%--                    <input type="text" name="id" id="fileId">--%>
-
                     <div class="checkbox" style="margin-bottom: 10px">
                         <input type="file" name="file" multiple>
                     </div>

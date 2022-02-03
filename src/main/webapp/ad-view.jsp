@@ -30,7 +30,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./lightbox2/js/lightbox.js"></script>
 
-    <%--    <script src="./js/index.js"></script>--%>
     <script>
 
         $(document).ready(function () {
@@ -56,7 +55,6 @@
                     if (item.isBroken) {
                         isBroken = 'да';
                     }
-
                     document.getElementById("c-header").innerHTML = item.mark + ' ' + item.model + ', ' + item.price + ' ₽';
                     document.getElementById("mark").innerHTML = '<span class="item-params-label">Марка автомобиля: </span>' + item.mark;
                     document.getElementById("model").innerHTML = '<span class="item-params-label">Модель: </span>' + item.model;
@@ -122,8 +120,7 @@
                         <li class="list-group-item" id="isBroken"></li>
                         <li class="list-group-item" id="city"></li>
                         <li class="list-group-item">
-                            <button class="btn btn-success" id="phone" onclick="showPhone(this.value)">Позвонить
-                            </button>
+                            <button class="btn btn-success" id="phone" onclick="showPhone(this.value)">Позвонить</button>
                         </li>
                     </ul>
                 </div>

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import ru.job4j.cars.dto.AdDto;
+import ru.job4j.cars.dto.UserDto;
 import ru.job4j.cars.model.*;
 import ru.job4j.cars.repository.AdRepository;
 import ru.job4j.cars.repository.CarRepository;
@@ -19,8 +20,6 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-//import ru.job4j.cars.service.AdService;
-
 @WebServlet("/ads")
 public class AdsServlet extends HttpServlet {
 
@@ -32,8 +31,6 @@ public class AdsServlet extends HttpServlet {
         while (req.getReader().ready()) {
             sb.append(req.getReader().readLine());
         }
-        System.out.println("SBUILDER " + sb);
-
         JsonObject jobj = new Gson().fromJson(String.valueOf(sb), JsonObject.class);
         String description = jobj.get("description").getAsString();
 
@@ -51,7 +48,8 @@ public class AdsServlet extends HttpServlet {
         Car car = Car.of(mark, model, body, year, power, mileage, isBroken);
         CarRepository.instOf().add(car);
 
-        String username = req.getSession().getAttribute("user").toString();
+        UserDto userDto= (UserDto) req.getSession().getAttribute("user");
+        String username = userDto.getName();
         User user = UserRepository.instOf().findByName(username);
 
         Ad ad = Ad.of(car, description, city, user, price);

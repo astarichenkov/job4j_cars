@@ -155,13 +155,10 @@
             </div>
             <div class="card-body">
                 <form action="" method="post" enctype="application/x-www-form-urlencoded">
-                    <%--                <form action="${pageContext.request.contextPath}/photo-upload.do" method="post" enctype="application/x-www-form-urlencoded">--%>
-                    <%--                <form action="${pageContext.request.contextPath}/ads" method="post" enctype="multipart/form-data">--%>
                     <div class="form-group">
                         <div class="left-inputs">
                             <label>Описание</label>
                             <input type="text" class="form-control" name="description" id="description" value="TEST">
-<%--                            <br>--%>
                             <label>Марка автомобиля</label>
                             <select class="form-control" id="marksList" name="mark" value="1"
                                     onchange="fillModels(this.value)"></select>

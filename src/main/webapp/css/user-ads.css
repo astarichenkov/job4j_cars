@@ -9,6 +9,15 @@
     align-items: center;
 }
 
+a.car-link {
+    font-weight: bold;
+    font-size: large;
+}
+
+a, img {
+    max-width: 266px;
+}
+
 img.sold-status {
     width: 180px;
 }
