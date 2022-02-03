@@ -48,7 +48,7 @@ public class AdsServlet extends HttpServlet {
         Car car = Car.of(mark, model, body, year, power, mileage, isBroken);
         CarRepository.instOf().add(car);
 
-        UserDto userDto= (UserDto) req.getSession().getAttribute("user");
+        UserDto userDto = (UserDto) req.getSession().getAttribute("user");
         String username = userDto.getName();
         User user = UserRepository.instOf().findByName(username);
 
