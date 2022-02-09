@@ -1,19 +1,12 @@
 package ru.job4j.cars.repository;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.job4j.cars.model.User;
+import ru.job4j.cars.utils.HibernateUtil;
 
 import java.util.function.Function;
 
-public class UserRepository implements AutoCloseable {
-    private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure().build();
-    private final SessionFactory sf = new MetadataSources(registry)
-            .buildMetadata().buildSessionFactory();
+public class UserRepository {
 
     private static final class Lazy {
         private static final UserRepository INST = new UserRepository();
@@ -49,16 +42,11 @@ public class UserRepository implements AutoCloseable {
     }
 
     private <T> T tx(final Function<Session, T> command) {
-        Session session = sf.openSession();
+        Session session = HibernateUtil.openSession();
         session.beginTransaction();
         T result = command.apply(session);
         session.getTransaction().commit();
         session.close();
         return result;
-    }
-
-    @Override
-    public void close() throws Exception {
-        StandardServiceRegistryBuilder.destroy(registry);
     }
 }

@@ -9,15 +9,12 @@ import ru.job4j.cars.model.BodyType;
 import ru.job4j.cars.model.Car;
 import ru.job4j.cars.model.Mark;
 import ru.job4j.cars.model.Model;
+import ru.job4j.cars.utils.HibernateUtil;
 
 import java.util.List;
 import java.util.function.Function;
 
-public class CarRepository implements AutoCloseable {
-    private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure().build();
-    private final SessionFactory sf = new MetadataSources(registry)
-            .buildMetadata().buildSessionFactory();
+public class CarRepository {
 
     private static final class Lazy {
         private static final CarRepository INST = new CarRepository();
@@ -62,7 +59,7 @@ public class CarRepository implements AutoCloseable {
 
 
     private <T> T tx(final Function<Session, T> command) {
-        Session session = sf.openSession();
+        Session session = HibernateUtil.openSession();
         session.beginTransaction();
         T result = command.apply(session);
         session.getTransaction().commit();
@@ -103,10 +100,5 @@ public class CarRepository implements AutoCloseable {
                                 + "where m.name = :fName", Mark.class)
                         .setParameter("fName", name)
                         .uniqueResult());
-    }
-
-    @Override
-    public void close() throws Exception {
-        StandardServiceRegistryBuilder.destroy(registry);
     }
 }
